@@ -4,12 +4,15 @@
 <script src="<?= base_url() ?>assets/icons/feather-icons/feather.min.js"></script>
 
 <script src="<?= base_url() ?>assets/vendor_components/moment/min/moment.min.js"></script>
-<script src="<?= base_url() ?>assets/vendor_components/fullcalendar/fullcalendar.js"></script>
+
+<script src="<?= base_url() ?>assets/vendor_components/datatable/datatables.min.js"></script>
 
 <!-- EduAdmin App -->
 <script src="<?= base_url() ?>assets/js/template.js"></script>
-<script src="<?= base_url() ?>assets/js/pages/calendar.js"></script>
 
+<script>
+	$('#example1').DataTable();
+</script>
 </body>
 
 </html>

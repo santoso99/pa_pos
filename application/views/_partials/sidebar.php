@@ -23,12 +23,12 @@
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="component_bootstrap_switch.html">
+						<a href="<?= site_url('master/brand') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Brand Produk
 						</a>
 					</li>
 					<li>
-						<a href="component_date_paginator.html">
+						<a href="<?= site_url('master/kategori') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Kategori Produk
 						</a>
 					</li>

@@ -12,6 +12,18 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*
 | -------------------------------------------------------------------------
-| MASTER DATA
+| MASTER DATA BRAND
 | -------------------------------------------------------------------------
 */
+$route['master/brand']					= 'master/Brand';
+$route['master/brand/store']				= 'master/Brand/store';
+$route['master/brand/update']				= 'master/Brand/update';
+
+/*
+| -------------------------------------------------------------------------
+| MASTER DATA CATEGORY
+| -------------------------------------------------------------------------
+*/
+$route['master/kategori']					= 'master/Kategori';
+$route['master/kategori/store']				= 'master/Kategori/store';
+$route['master/kategori/update']				= 'master/Kategori/update';
