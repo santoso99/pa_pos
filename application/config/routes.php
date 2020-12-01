@@ -39,3 +39,10 @@ $route['master/produk/store']					= 'master/Produk/store';
 $route['master/produk/edit/(:any)']			= 'master/Produk/edit/$1';
 $route['master/produk/update']				= 'master/Produk/update';
 $route['master/produk/show/(:any)']			= 'master/Produk/show/$1';
+
+/*--------------------------------------------------
+MASTER CHART OF ACCOUNT
+/--------------------------------------------------*/
+$route['master/coa']						= 'master/Coa';
+$route['master/coa/store']					= 'master/Coa/store';
+$route['master/coa/update']					= 'master/Coa/update';

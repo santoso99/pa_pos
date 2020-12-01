@@ -48,7 +48,7 @@
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li><a href="ui_grid.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Akun</a></li>
+					<li><a href="<?= site_url('master/coa') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Akun</a></li>
 					<li><a href="ui_grid.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pengaturan Transaksi</a></li>
 				</ul>
 			</li>
