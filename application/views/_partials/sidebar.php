@@ -33,7 +33,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="component_media_advanced.html">
+						<a href="<?= site_url('master/produk') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Produk
 						</a>
 					</li>

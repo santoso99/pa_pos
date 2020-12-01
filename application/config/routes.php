@@ -27,3 +27,15 @@ $route['master/brand/update']				= 'master/Brand/update';
 $route['master/kategori']					= 'master/Kategori';
 $route['master/kategori/store']				= 'master/Kategori/store';
 $route['master/kategori/update']				= 'master/Kategori/update';
+
+/*
+| -------------------------------------------------------------------------
+| MASTER DATA PRODUCT
+| -------------------------------------------------------------------------
+*/
+$route['master/produk']						= 'master/Produk';
+$route['master/produk/create']				= 'master/Produk/create';
+$route['master/produk/store']					= 'master/Produk/store';
+$route['master/produk/edit/(:any)']			= 'master/Produk/edit/$1';
+$route['master/produk/update']				= 'master/Produk/update';
+$route['master/produk/show/(:any)']			= 'master/Produk/show/$1';
