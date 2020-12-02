@@ -53,3 +53,10 @@ MASTER VENDOR
 $route['master/vendor']						= 'master/Vendor';
 $route['master/vendor/store']					= 'master/Vendor/store';
 $route['master/vendor/update']				= 'master/Vendor/update';
+
+/*--------------------------------------------------
+MASTER CUSTOMER
+/--------------------------------------------------*/
+$route['master/pelanggan']					= 'master/Pelanggan';
+$route['master/pelanggan/store']				= 'master/Pelanggan/store';
+$route['master/pelanggan/update']				= 'master/Pelanggan/update';

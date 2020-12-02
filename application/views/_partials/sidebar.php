@@ -66,7 +66,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="ui_grid.html">
+						<a href="<?= site_url('master/pelanggan') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pelanggan
 						</a>
 					</li>
