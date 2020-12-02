@@ -46,3 +46,10 @@ MASTER CHART OF ACCOUNT
 $route['master/coa']						= 'master/Coa';
 $route['master/coa/store']					= 'master/Coa/store';
 $route['master/coa/update']					= 'master/Coa/update';
+
+/*--------------------------------------------------
+MASTER VENDOR
+/--------------------------------------------------*/
+$route['master/vendor']						= 'master/Vendor';
+$route['master/vendor/store']					= 'master/Vendor/store';
+$route['master/vendor/update']				= 'master/Vendor/update';
