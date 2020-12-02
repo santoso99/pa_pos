@@ -216,8 +216,8 @@
 								<label class="form-check-label" for="inlineRadio1">Debet</label>
 							</div>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="normal_balance" id="inlineRadio2" value="k" <?= $row['normal_balance'] == 'k' ? 'checked' : '' ?>>
-								<label class="form-check-label" for="inlineRadio2">Kredit</label>
+								<input class="form-check-input" type="radio" name="normal_balance" id="<?= $row['account_no'] ?>" value="k" <?= $row['normal_balance'] == 'k' ? 'checked' : '' ?>>
+								<label class="form-check-label" for="<?= $row['account_no'] ?>">Kredit</label>
 							</div>
 						</div>
 					</div>

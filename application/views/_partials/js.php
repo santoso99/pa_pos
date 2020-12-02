@@ -6,12 +6,12 @@
 <script src="<?= base_url() ?>assets/vendor_components/moment/min/moment.min.js"></script>
 
 <script src="<?= base_url() ?>assets/vendor_components/datatable/datatables.min.js"></script>
-
+<script src="<?= base_url() ?>assets/vendor_components/select2/dist/js/select2.full.js"></script>
 <!-- EduAdmin App -->
 <script src="<?= base_url() ?>assets/js/template.js"></script>
 <script src="<?= base_url() ?>assets/js/currency.js"></script>
 <script src="<?= base_url() ?>assets/js/pages/ecommerce_details.js"></script>
-
+<script src="<?= base_url() ?>assets/js/pages/advanced-form-element.js"></script>
 <script>
 	$('#example1').DataTable();
 </script>
@@ -57,6 +57,51 @@
 		}, false);
 	})();
 </script>
+<!-- scritp dynamic form -->
+<script type="text/javascript">
+	jQuery(document).delegate('a.add-record', 'click', function(e) {
+		e.preventDefault();
+		var content = jQuery('#sample_table tr'),
+			size = jQuery('#tbl_posts >tbody >tr').length + 1,
+			element = null,
+			element = content.clone();
+
+		element.attr('id', 'rec-' + size);
+		element.find('.delete-record').attr('data-id', size);
+		element.appendTo('#tbl_posts_body');
+		element.find('.sn').html(size);
+		element.find('.select21').select2();
+		$("input[data-type='currency']").on({
+			keyup: function() {
+				formatCurrency($(this));
+			},
+			blur: function() {
+				formatCurrency($(this), "blur");
+			}
+		});
+	});
+</script>
+<script>
+	jQuery(document).delegate('a.delete-record', 'click', function(e) {
+		e.preventDefault();
+		var didConfirm = confirm("Apakah Anda yakin untuk menghapus baris ?");
+		if (didConfirm == true) {
+			var id = jQuery(this).attr('data-id');
+			var targetDiv = jQuery(this).attr('targetDiv');
+			jQuery('#rec-' + id).remove();
+
+			//regnerate index number on table
+			$('#tbl_posts_body tr').each(function(index) {
+				//alert(index);
+				$(this).find('span.sn').html(index + 1);
+			});
+			return true;
+		} else {
+			return false;
+		}
+	});
+</script>
+
 </body>
 
 </html>

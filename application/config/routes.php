@@ -60,3 +60,10 @@ MASTER CUSTOMER
 $route['master/pelanggan']					= 'master/Pelanggan';
 $route['master/pelanggan/store']				= 'master/Pelanggan/store';
 $route['master/pelanggan/update']				= 'master/Pelanggan/update';
+
+/*--------------------------------------------------
+MASTER CUSTOMER
+/--------------------------------------------------*/
+$route['transaksi/pembelian']					= 'transaksi/Pembelian';
+$route['transaksi/pembelian/create']			= 'transaksi/Pembelian/create';
+$route['transaksi/pembelian/store']			= 'transaksi/Pembelian/store';

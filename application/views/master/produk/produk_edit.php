@@ -58,7 +58,7 @@
 					<div class="container mt-4">
 						<div class="box">
 							<div class="box-header with-border">
-								<h4 class="box-title"><i class="ion-ios ion-plus"></i> Form Edit Produk Baru</h4>
+								<h4 class="box-title"><i class="ion-ios ion-edit"></i> Form Edit Produk Baru</h4>
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
