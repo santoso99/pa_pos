@@ -31,6 +31,7 @@ class Pembelian extends CI_Controller
 	public function store()
 	{
 		$this->model->store();
+		$this->session->set_flashdata('success', 'Pembelian berhasil dilakukan !');
 	}
 }
 

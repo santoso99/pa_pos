@@ -92,27 +92,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group row">
-										<label for="biaya_angkut" class="col-sm-2 control-label">Ongkos Kirim</label>
 
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="biaya_angkut" id="biaya_angkut" data-type="currency" required>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="tax" class="col-sm-2 control-label">Pajak</label>
-
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="tax" id="tax" data-type="currency" required>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="potongan" class="col-sm-2 control-label">Potongan</label>
-
-										<div class="col-sm-10">
-											<input type="text" class="form-control" name="potongan" id="potongan" data-type="currency" required>
-										</div>
-									</div>
 									<div class="form-group row">
 										<label for="keterangan" class="col-sm-2 control-label">Catatan</label>
 

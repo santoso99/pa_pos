@@ -34,14 +34,14 @@ class M_pembelian extends CI_Model
 			->join('warna_barang as b', 'a.id_barang=b.id_barang');
 		return $this->db->get()->result_array();
 	}
+	public function validate_kas()
+	{
+	}
 	public function store()
 	{
 		$id_transaksi 			= $this->id();
 		$id_warna				= $this->input->post('id_warna');
 		$id_vendor			= $this->input->post('id_vendor');
-		$tax					= intval(preg_replace("/[^0-9]/", "", $this->input->post('tax')));
-		$biaya_angkut			= intval(preg_replace("/[^0-9]/", "", $this->input->post('biaya_angkut')));
-		$potongan				= intval(preg_replace("/[^0-9]/", "", $this->input->post('potongan')));
 		$tipe				= "purchasing";
 		$keterangan			= $this->input->post('keterangan');
 		$total = 0;
@@ -59,16 +59,24 @@ class M_pembelian extends CI_Model
 		$transaksi = [
 			'id_transaksi'		=> $id_transaksi,
 			'id_vendor'		=> $id_vendor,
-			'tax'			=> $tax,
-			'biaya_angkut'		=> $biaya_angkut,
-			'potongan'		=> $potongan,
+			'total'			=> $total,
 			'tipe'			=> $tipe,
 			'keterangan'		=> $keterangan
 		];
-		echo "<pre>";
-		print_r($total);
-		echo "</pre>";
-		die;
+		$jurnal =
+			[
+				[
+					'account_no'		=> '1-10005',
+					'posisi'			=> 'db',
+					'nominal'			=> $total,
+					'id_transaksi'		=> $id_transaksi
+				],
+
+			];
+		$this->db->trans_start();
+		$this->db->insert('transaksi', $transaksi);
+		$this->db->insert_batch('pembelian', $detail);
+		$this->db->trans_complete();
 	}
 }
 
