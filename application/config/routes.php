@@ -68,3 +68,10 @@ $route['transaksi/pembelian']					= 'transaksi/Pembelian';
 $route['transaksi/pembelian/create']			= 'transaksi/Pembelian/create';
 $route['transaksi/pembelian/store']			= 'transaksi/Pembelian/store';
 $route['transaksi/pembelian/detail/(:any)']		= 'transaksi/Pembelian/show/$1';
+
+
+
+/*--------------------------------------------------
+Laporan Jurnal Umum
+/--------------------------------------------------*/
+$route['akuntansi/jurnal_umum']				= 'laporan/Jurnal';
