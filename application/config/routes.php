@@ -69,6 +69,17 @@ $route['transaksi/pembelian/create']			= 'transaksi/Pembelian/create';
 $route['transaksi/pembelian/store']			= 'transaksi/Pembelian/store';
 $route['transaksi/pembelian/detail/(:any)']		= 'transaksi/Pembelian/show/$1';
 
+/*--------------------------------------------------
+TRANSAKSI PENJUALAN
+/--------------------------------------------------*/
+$route['transaksi/penjualan']						= 'transaksi/Penjualan';
+$route['transaksi/penjualan/draff']				= 'transaksi/Penjualan/create_draff';
+$route['transaksi/penjualan/find_produk']			= 'transaksi/Penjualan/find_produk';
+$route['transaksi/penjualan/create/(:any)']			= 'transaksi/Penjualan/create/$1';
+$route['transaksi/penjualan/add_item']				= 'transaksi/Penjualan/add_item';
+$route['transaksi/penjualan/detail/(:any)']			= 'transaksi/Penjualan/show/$1';
+$route['transaksi/penjualan/detail/(:any)/(:any)']	= 'transaksi/Penjualan/show/$1/$2';
+$route['transaksi/penjualan/store']				= 'transaksi/Penjualan/store';
 
 
 /*--------------------------------------------------

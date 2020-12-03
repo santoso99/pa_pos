@@ -112,7 +112,7 @@
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="error_404.html">
+						<a href="<?= site_url('transaksi/penjualan') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Penjualan</a>
 					</li>
 					<li>

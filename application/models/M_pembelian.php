@@ -41,7 +41,7 @@ class M_pembelian extends CI_Model
 		$this->db->where('tipe', 'purchasing');
 		$this->db->order_by('id_transaksi', 'DESC');
 		$this->db->limit(1);
-		$query = $this->db->get('Transaksi');
+		$query = $this->db->get('transaksi');
 		if ($query->num_rows() <> 0) {
 			$data = $query->row();
 			$code = intval($data->id) + 1;
@@ -84,6 +84,7 @@ class M_pembelian extends CI_Model
 				'id_warna'	=> $id_warna[$key],
 				'cogs'		=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key])),
 				'qty'		=> $this->input->post('qty')[$key],
+				'ready'		=> $this->input->post('qty')[$key],
 				'total'		=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key]) * $this->input->post('qty')[$key])
 			];
 			$total = $total + ($detail[$key]['total']);

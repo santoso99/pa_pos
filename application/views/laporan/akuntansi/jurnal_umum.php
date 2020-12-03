@@ -82,7 +82,7 @@
 									<tbody>
 										<?php foreach ($row_jurnal as $r1) : ?>
 											<tr>
-												<td rowspan="<?= $r1['row'] + 1 ?>"><?= $r1['tanggal'] ?></td>
+												<td rowspan="<?= $r1['row'] + 1 ?>"><?= date('d-m-Y', strtotime($r1['tanggal'])) ?></td>
 											</tr>
 											<?php foreach ($jurnal as $r2) : ?>
 												<?php if ($r1['id_transaksi'] == $r2['id_transaksi']) : ?>

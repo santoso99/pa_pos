@@ -102,6 +102,27 @@
 	});
 </script>
 
+<script>
+	$(document).ready(function() {
+		$('#id_warna').change(function() {
+			var id_warna = $('#id_warna').val();
+			$.ajax({
+				url: '<?= site_url('transaksi/penjualan/find_produk') ?>',
+				type: 'POST',
+				dataType: 'JSON',
+				data: {
+					id_warna: id_warna,
+				},
+				success: function(data) {
+
+					harga_jual = new Intl.NumberFormat('ja-JP').format(data.harga_satuan);
+					$('#harga_jual').val('Rp ' + harga_jual);
+				}
+			});
+		});
+	});
+</script>
+
 </body>
 
 </html>
