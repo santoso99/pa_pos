@@ -15,9 +15,19 @@ class Pembelian extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'title'		=> 'Transaksi Pembelian'
+			'title'		=> 'Transaksi Pembelian',
+			'all'		=> $this->model->all()
 		];
 		$this->load->view('transaksi/pembelian/pembelian_list', $data);
+	}
+	public function show($id)
+	{
+		$data = [
+			'title'		=> 'Detail Transaksi Pembelian',
+			'pembelian'	=> $this->model->select($id),
+			'detail'		=> $this->model->detail($id)
+		];
+		$this->load->view('transaksi/pembelian/pembelian_detail', $data);
 	}
 	public function create()
 	{
@@ -30,8 +40,9 @@ class Pembelian extends CI_Controller
 	}
 	public function store()
 	{
-		$this->model->store();
-		$this->session->set_flashdata('success', 'Pembelian berhasil dilakukan !');
+		$request = $this->model->store();
+		$this->session->set_flashdata($request['response'], $request['message']);
+		redirect('transaksi/pembelian');
 	}
 }
 

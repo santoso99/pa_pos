@@ -72,13 +72,25 @@
 											<th>#</th>
 											<th>No Transaksi</th>
 											<th>Tanggal</th>
+											<th>Vendor</th>
 											<th>Total</th>
-											<th>Status</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-
+										<?php $no = 1;
+										foreach ($all as $row) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $row['id_transaksi'] ?></td>
+												<td><?= date('d-m-Y H:i:s', strtotime($row['tanggal'])) ?></td>
+												<td><?= $row['nama_vendor'] ?></td>
+												<td><?= nominal($row['total']) ?></td>
+												<td>
+													<a href="<?= site_url('transaksi/pembelian/detail/' . $row['id_transaksi']) ?>" class="btn btn-info btn-sm"><i class="ion-ios-list"></i></a>
+												</td>
+											</tr>
+										<?php endforeach ?>
 									</tbody>
 								</table>
 
