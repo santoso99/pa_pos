@@ -136,7 +136,7 @@
 <!-- /.content-wrapper -->
 
 
-<!-- Modal add type of project -->
+<!-- Modal edit project -->
 <div class="modal fade" id="addCoa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -188,7 +188,7 @@
 </div>
 
 
-<!-- Modal edit type of project -->
+<!-- Modal edit coa -->
 <?php foreach ($all as $row) : ?>
 	<div class="modal fade" id="editCoa<?= $row['account_no'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -212,8 +212,8 @@
 						<div class="form-group">
 							<label>Saldo Normal</label><br>
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="normal_balance" id="inlineRadio1" value="d" <?= $row['normal_balance'] == 'd' ? 'checked' : '' ?>>
-								<label class="form-check-label" for="inlineRadio1">Debet</label>
+								<input class="form-check-input" type="radio" name="normal_balance" id="<?= $row['account_no'] . '1' ?>" value="d" <?= $row['normal_balance'] == 'd' ? 'checked' : '' ?>>
+								<label class="form-check-label" for="<?= $row['account_no'] . '1' ?>">Debet</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="normal_balance" id="<?= $row['account_no'] ?>" value="k" <?= $row['normal_balance'] == 'k' ? 'checked' : '' ?>>
