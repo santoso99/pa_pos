@@ -15,6 +15,7 @@
 										<i class="mdi mdi-home-outline"></i>
 									</a>
 								</li>
+								<li class="breadcrumb-item">Transaksi</li>
 								<li class="breadcrumb-item">Pembelian</li>
 								<li class="breadcrumb-item" aria-current="page">Pembelian</li>
 							</ol>

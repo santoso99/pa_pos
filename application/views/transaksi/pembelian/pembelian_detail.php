@@ -15,8 +15,9 @@
 										<i class="mdi mdi-home-outline"></i>
 									</a>
 								</li>
+								<li class="breadcrumb-item">Transaksi</li>
 								<li class="breadcrumb-item"><a href="<?= site_url('transaksi/pembelian') ?>">Pembelian</a></li>
-								<li class="breadcrumb-item" aria-current="page">Buat Pembelian Baru</li>
+								<li class="breadcrumb-item" aria-current="page">Detail Pembelian</li>
 							</ol>
 						</nav>
 					</div>
