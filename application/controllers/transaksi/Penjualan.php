@@ -44,7 +44,7 @@ class Penjualan extends CI_Controller
 			$this->load->view('transaksi/penjualan/penjualan_create', $data);
 		} else {
 			$data = [
-				'title'			=> 'Detail Penjualan Baru',
+				'title'			=> 'Detail Penjualan',
 				'penjualan'		=> $this->model->select($id),
 				'detail'			=> $this->model->detail($id),
 				'id_transaksi'		=> $id
