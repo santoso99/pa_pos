@@ -192,7 +192,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="component_sweatalert.html">
+						<a href="<?= site_url('inventory/penjualan') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Penjualan
 						</a>
 					</li>

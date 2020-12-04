@@ -97,3 +97,8 @@ $route['akuntansi/buku_besar']				= 'laporan/Buku';
 LAPORAN PEMBELIAN
 /--------------------------------------------------*/
 $route['inventory/pembelian']					= 'laporan/Pembelian';
+
+/*--------------------------------------------------
+LAPORAN PENJUALAN
+/--------------------------------------------------*/
+$route['inventory/penjualan']					= 'laporan/Penjualan';
