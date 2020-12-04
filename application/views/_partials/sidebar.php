@@ -187,7 +187,7 @@
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="component_modals.html">
+						<a href="<?= site_url('inventory/pembelian') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Pembelian
 						</a>
 					</li>
