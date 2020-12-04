@@ -23,7 +23,8 @@ class M_jurnal extends CI_Model
 			->where('year(a.tanggal)', $y)
 			->group_by('a.id_transaksi')
 			->group_by('date(a.tanggal)')
-			->order_by('date(a.tanggal)', 'ASC');
+			->order_by('date(a.tanggal)', 'ASC')
+			->order_by('a.id_transaksi', 'ASC');
 		return $this->db->get()->result_array();
 	}
 }

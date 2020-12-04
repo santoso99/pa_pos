@@ -86,3 +86,8 @@ $route['transaksi/penjualan/store']				= 'transaksi/Penjualan/store';
 Laporan Jurnal Umum
 /--------------------------------------------------*/
 $route['akuntansi/jurnal_umum']				= 'laporan/Jurnal';
+
+/*--------------------------------------------------
+Laporan BUKU BESAR
+/--------------------------------------------------*/
+$route['akuntansi/buku_besar']				= 'laporan/Buku';
