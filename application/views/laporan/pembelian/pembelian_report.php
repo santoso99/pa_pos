@@ -80,16 +80,33 @@
 									</thead>
 									<tbody>
 										<?php if ($all) : ?>
-											<?php $no = 1;
+											<?php
+											$no = 1;
+											$total = 0;
 											foreach ($all as $row) : ?>
 												<tr>
 													<td><?= $no++ ?></td>
 													<td><?= date('d-m-Y H:i:s', strtotime($row['tanggal'])) ?></td>
 													<td><?= $row['id_transaksi'] ?></td>
 													<td><?= $row['nama_vendor'] ?></td>
-													<td><?= nominal($row['total']) ?></td>
+													<td>
+														<span class="text-left">Rp</span>
+														<span style="float:right;">
+															<?= nominal1($row['total']) ?>
+														</span>
+													</td>
+													<?php $total = $total + $row['total'] ?>
 												</tr>
 											<?php endforeach ?>
+											<tr>
+												<td class="text-right" colspan="4"><b>Total</b></td>
+												<td>
+													<span class="text-left">Rp</span>
+													<span style="float:right;">
+														<?= nominal1($total) ?>
+													</span>
+												</td>
+											</tr>
 										<?php endif ?>
 										<?php if (!$all) : ?>
 											<tr>
