@@ -197,7 +197,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="component_notification.html">
+						<a href="<?= site_url('inventory/fifo') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Kartu Stok
 						</a>
 					</li>

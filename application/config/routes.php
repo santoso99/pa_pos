@@ -102,3 +102,8 @@ $route['inventory/pembelian']					= 'laporan/Pembelian';
 LAPORAN PENJUALAN
 /--------------------------------------------------*/
 $route['inventory/penjualan']					= 'laporan/Penjualan';
+
+/*--------------------------------------------------
+LAPORAN FIFO
+/--------------------------------------------------*/
+$route['inventory/fifo']						= 'laporan/Fifo';
