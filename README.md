@@ -4,7 +4,7 @@ Metode yang digunakan dalam metode fifo adalah barang yang pertama kali masuk ad
 
 # Instalasi
 
-- `Import Database dengan nama "pa_project`
+- `Import Database dengan nama "pa_pos`
 - `Save Folder kedalam htdocs kamu`
 - `Jika terdapat error "mysqli::real_connect():access denied for user root@localhost....". kamu cuman harus mengganti username dan password pada application/config/database.php. Biasanya pada XAMPP menggunakan username = 'root' dan password=' '
 - `Jika template tidak berjalan maka kamu pelu mengubah base url pada application/canfig/config.php. Biasanya base_url 'localhost/pa_pos`
