@@ -106,6 +106,10 @@ LAPORAN BUKU BESAR
 /--------------------------------------------------*/
 $route['akuntansi/buku_besar']				= 'laporan/Buku';
 
+/*--------------------------------------------------
+LAPORAN NERACA SALDO
+/--------------------------------------------------*/
+$route['akuntansi/neraca_saldo']				= 'laporan/Neraca_saldo';
 
 /*--------------------------------------------------
 LAPORAN PEMBELIAN

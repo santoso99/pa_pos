@@ -171,7 +171,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="widgets_blog.html">
+						<a href="<?= site_url('akuntansi/neraca_saldo') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Neraca Saldo
 						</a>
 					</li>
