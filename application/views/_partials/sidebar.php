@@ -138,7 +138,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="auth_register.html">
+						<a href="<?= site_url('kas/keluar') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Kas Keluar
 						</a>
 					</li>

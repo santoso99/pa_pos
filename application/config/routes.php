@@ -83,12 +83,18 @@ $route['transaksi/penjualan/store']				= 'transaksi/Penjualan/store';
 
 
 /*--------------------------------------------------
-TRANSAKSI PENJUALAN
+TRANSAKSI KAS MASUK
 /--------------------------------------------------*/
 $route['kas/masuk']								= 'transaksi/Kas_masuk';
 $route['kas/masuk/store']						= 'transaksi/Kas_masuk/store';
 $route['kas/masuk/update']						= 'transaksi/Kas_masuk/update';
 
+/*--------------------------------------------------
+TRANSAKSI KAS KELUAR
+/--------------------------------------------------*/
+$route['kas/keluar']							= 'transaksi/Kas_keluar';
+$route['kas/keluar/store']						= 'transaksi/Kas_keluar/store';
+$route['kas/keluar/update']						= 'transaksi/Kas_keluar/update';
 
 /*--------------------------------------------------
 LAPORAN Jurnal Umum
