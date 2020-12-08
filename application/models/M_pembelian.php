@@ -89,14 +89,16 @@ class M_pembelian extends CI_Model
 			];
 			$total = $total + ($detail[$key]['total']);
 		}
-		$stok = [
-			'id_transaksi'		=> $id_transaksi,
-			'id_warna'		=> $id_warna[$key],
-			'cogs'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key])),
-			'qty'			=> $this->input->post('qty')[$key],
-			'total'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key]) * $this->input->post('qty')[$key]),
-			'tipe'			=> 'purchasing'
-		];
+		foreach ($id_warna as $i => $val) {
+			$stok[] = [
+				'id_transaksi'		=> $id_transaksi,
+				'id_warna'		=> $id_warna[$i],
+				'cogs'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i])),
+				'qty'			=> $this->input->post('qty')[$i],
+				'total'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i]) * $this->input->post('qty')[$i]),
+				'tipe'			=> 1
+			];
+		}
 		$transaksi = [
 			'id_transaksi'		=> $id_transaksi,
 			'id_vendor'		=> $id_vendor,
@@ -126,7 +128,7 @@ class M_pembelian extends CI_Model
 			$this->db->trans_start();
 			$this->db->insert('transaksi', $transaksi);
 			$this->db->insert_batch('pembelian', $detail);
-			$this->db->insert_batch('stok', $detail);
+			$this->db->insert_batch('stok', $stok);
 			$this->db->insert_batch('jurnal', $jurnal);
 			$this->db->trans_complete();
 
