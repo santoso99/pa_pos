@@ -16,8 +16,8 @@
 									</a>
 								</li>
 								<li class="breadcrumb-item">Transaksi</li>
-								<li class="breadcrumb-item">Penjualan</li>
-								<li class="breadcrumb-item" aria-current="page">Penjualan</li>
+								<li class="breadcrumb-item">Kas Umum</li>
+								<li class="breadcrumb-item" aria-current="page">Kas Masuk</li>
 							</ol>
 						</nav>
 					</div>
@@ -73,14 +73,27 @@
 											<th>#</th>
 											<th>No Transaksi</th>
 											<th>Tanggal</th>
-											<th>Pelanggan</th>
+											<th>Keterangan</th>
 											<th>Total</th>
-											<th>Status</th>
 											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
-
+										<?php $no = 1;
+										foreach ($all as $row) : ?>
+											<tr>
+												<td><?= $no++ ?></td>
+												<td><?= $row['id_transaksi'] ?></td>
+												<td><?= date('d-m-Y', strtotime($row['tanggal'])) ?></td>
+												<td><?= $row['keterangan'] ?></td>
+												<td><?= nominal($row['total']) ?></td>
+												<td>
+													<a href="#" class="btn btn-warning btn-sm mb-4 mt-4" data-toggle="modal" data-target="#KasEdit<?= $row['id_transaksi'] ?>">
+														<i class="ion-ios ion-edit"></i>
+													</a>
+												</td>
+											</tr>
+										<?php endforeach ?>
 									</tbody>
 								</table>
 							</div>
@@ -102,7 +115,7 @@
 
 
 <!-- Modal -->
-<div class="modal modal-fill fade" data-backdrop="false" id="Kas" tabindex="-1">
+<div class="modal modal-fill fade" data-backdrop="false" id="Kas">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -112,15 +125,80 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>Your content comes here</p>
-				<br><br><br><br><br><br>
+				<div class="alert alert-warning alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<h4><i class="icon fa fa-warning"></i> Peringatan !</h4>
+					Setelah anda menyimpan data, anda tidak dapat mengubah kategori transaksi !
+				</div>
+				<form action="<?= site_url('kas/masuk/store') ?>" method="POST">
+					<div class="form-group">
+						<label for="">Tanggal</label>
+						<input type="date" name="tanggal" class="form-control" max="<?= date('Y-m-d') ?>">
+					</div>
+					<div class="form-group">
+						<label for="">Kategori Transaksi</label>
+						<select name="id_setting" id="id_setting" class="form-control select2" style="width: 100%;" required>
+							<option value="">-pilih-</option>
+							<?php foreach ($setting as $st) : ?>
+								<option value="<?= $st['id_setting'] ?>"><?= $st['setting_name'] ?></option>
+							<?php endforeach ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="">Jumlah</label>
+						<input type="text" name="jumlah" class="form-control" data-type="currency" required>
+					</div>
+					<div class="form-group">
+						<label for="">Keterangan</label>
+						<textarea name="keterangan" cols="30" rows="10" class="form-control" required></textarea>
+					</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-				<button type="button" class="btn btn-primary float-right">Tambahkan</button>
+				<button type="submit" class="btn btn-primary float-right">Tambahkan</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
+<!-- /.modal -->
+
+
+<!-- Modal -->
+<?php foreach ($all as $row) : ?>
+	<div class="modal modal-fill fade" data-backdrop="false" id="KasEdit<?= $row['id_transaksi'] ?>">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit Kas Masuk</h5>
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="<?= site_url('kas/masuk/update') ?>" method="POST">
+						<input type="hidden" name="id_transaksi" value="<?= $row['id_transaksi'] ?>">
+						<div class="form-group">
+							<label for="">Tanggal</label>
+							<input type="date" name="tanggal" class="form-control" max="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d', strtotime($row['tanggal'])) ?>">
+						</div>
+						<div class="form-group">
+							<label for="">Jumlah</label>
+							<input type="text" name="jumlah" class="form-control" data-type="currency" value="<?= nominal($row['total']) ?>" required>
+						</div>
+						<div class="form-group">
+							<label for="">Keterangan</label>
+							<textarea name="keterangan" cols="30" rows="10" class="form-control" required><?= $row['keterangan'] ?></textarea>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+					<button type="submit" class="btn btn-primary float-right">Simpan Perubahan</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<?php endforeach ?>
 <!-- /.modal -->
 <?php $this->load->view('_partials/footer'); ?>
