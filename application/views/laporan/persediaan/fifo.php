@@ -91,11 +91,9 @@
 									<tbody>
 										<?php if ($all) : ?>
 											<?php
-											$id_sales = 0;
-											$id_stock = 0;
+
 											$purchase = 0;
 											$sales = 0;
-											$stock = 0;
 											foreach ($all as $f) : ?>
 												<tr>
 													<td><?= $f['id_transaksi'] ?></td>
@@ -121,6 +119,24 @@
 														<td></td>
 														<td></td>
 														<!-- /.sales order -->
+														<?php foreach ($stock as $st) : ?>
+															<?php if ($st['id_transaksi'] == $f['id_transaksi'] && $f['id_warna'] == $st['id_warna']) : ?>
+																<td><?= $st['sisa'] ?></td>
+																<td>
+																	<span class="text-left">Rp</span>
+																	<span style="float:right;">
+																		<?= nominal1($st['hpp']) ?>
+																	</span>
+																</td>
+																<td>
+																	<span class="text-left">Rp</span>
+																	<span style="float:right;">
+																		<?= nominal1($st['hpp'] * $st['sisa']) ?>
+																	</span>
+																</td>
+															<?php endif ?>
+														<?php endforeach ?>
+														<!-- /.inventory -->
 													<?php endif ?>
 													<!-- /.purhcasing area -->
 													<?php if ($f['tipe'] == 'order') : ?>
@@ -143,24 +159,26 @@
 															</span>
 														</td>
 														<!-- /.sales order -->
+														<?php foreach ($stock as $st) : ?>
+															<?php if ($st['id_transaksi'] == $f['id_transaksi'] && $f['id_warna'] == $st['id_warna'] && $f['id_pembelian'] == $st['id_pembelian']) : ?>
+																<td><?= $st['sisa'] ?></td>
+																<td>
+																	<span class="text-left">Rp</span>
+																	<span style="float:right;">
+																		<?= nominal1($st['hpp']) ?>
+																	</span>
+																</td>
+																<td>
+																	<span class="text-left">Rp</span>
+																	<span style="float:right;">
+																		<?= nominal1($st['hpp'] * $st['sisa']) ?>
+																	</span>
+																</td>
+															<?php endif ?>
+														<?php endforeach ?>
+														<!-- /.inventory -->
 													<?php endif ?>
-													<?php
-													foreach ($ref[$f['id_pembelian']] as $rp) : ?>
 
-														<td><?= $stock =  $f['qty'] ?></td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['cogs']) ?>
-															</span>
-														</td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['cogs'] * $stock) ?>
-															</span>
-														</td>
-													<?php endforeach ?>
 												</tr>
 											<?php endforeach ?>
 										<?php endif ?>

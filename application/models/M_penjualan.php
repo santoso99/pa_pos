@@ -146,7 +146,9 @@ class M_penjualan extends CI_Model
 							'id_transaksi'		=> $id_transaksi,
 							'id_warna'		=> $id_warna,
 							'qty'			=> 0,
-							'cogs'			=> $cogs
+							'cogs'			=> $cogs,
+							'tipe'			=> 0,
+							'id_pembelian'		=> $row['id_pembelian'],
 
 						];
 						$stock_update[] = [
@@ -169,7 +171,9 @@ class M_penjualan extends CI_Model
 							'id_transaksi'		=> $id_transaksi,
 							'id_warna'		=> $id_warna,
 							'qty'			=> $stock - $temp,
-							'cogs'			=> $cogs
+							'cogs'			=> $cogs,
+							'tipe'			=> 0,
+							'id_pembelian'		=> $row['id_pembelian']
 
 						];
 						$stock_update[] = [

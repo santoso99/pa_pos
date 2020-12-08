@@ -25,7 +25,7 @@ class Fifo extends CI_Controller
 		$data = [
 			'title'			=> 'Kartu Stok',
 			'all'			=> $this->model->all($y, $m),
-			'ref'			=> $this->model->list($y, $m),
+			'stock'			=> $this->model->stock(),
 			'month'			=> $m,
 			'year'			=> $y
 		];

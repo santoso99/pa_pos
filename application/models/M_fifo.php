@@ -119,9 +119,8 @@ class M_fifo extends CI_Model
 	}
 	public function stock()
 	{
-		$this->db->select('b.id_pembelian,sum(b.qty) as ready ')
-			->from('pembelian as b')
-			->group_by('id_pembelian');
+		$this->db->select('a.id_transaksi,a.id_warna,a.qty  as sisa,a.cogs as hpp,a.tipe as level,a.id_pembelian ')
+			->from('stok as a');
 		return $this->db->get()->result_array();
 	}
 	public function pembelian()
@@ -140,39 +139,6 @@ class M_fifo extends CI_Model
 			->where('a.tipe', 'order')
 			->order_by('id_transaksi', 'DESC');
 		return $this->db->get()->result_array();
-	}
-	public function list($y, $m)
-	{
-		$pembelian = $this->pembelian();
-		$penjualan = $this->penjualan();
-		$stock	 = $this->stock();
-		$ready = 0;
-		foreach ($stock as $r1) {
-
-			$stok['stok'][$r1['id_pembelian']][] = [
-				'id_pembelian'		=> $r1['id_pembelian'],
-				'ready'			=> $r1['ready'],
-
-			];
-		}
-
-		foreach ($penjualan as $key => $r2) {
-			$sisa =  $stok['stok'][$r2['id_pembelian']][0]['ready'] - $r2['jumlah_jual'];
-
-			$sales['penjualan'][$r2['id_pembelian']][] = [
-				'tanggal'			=> $r2['tanggal'],
-				'id_pembelian'		=> $r2['id_pembelian'],
-				'ready'			=> $stok['stok'][$r2['id_pembelian']][0]['ready'],
-				'sales'			=> $sisa - $r2['jumlah_jual']
-			];
-		}
-		echo "<pre>";
-		echo print_r($stok);
-		echo print_r($sales);
-		echo "</pre>";
-		die;
-
-		return $stok;
 	}
 }
 
