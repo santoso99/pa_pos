@@ -133,7 +133,7 @@
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="auth_login.html">
+						<a href="<?= site_url('kas/masuk') ?>">
 							<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Kas Masuk
 						</a>
 					</li>

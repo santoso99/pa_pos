@@ -83,6 +83,12 @@ $route['transaksi/penjualan/store']				= 'transaksi/Penjualan/store';
 
 
 /*--------------------------------------------------
+TRANSAKSI PENJUALAN
+/--------------------------------------------------*/
+$route['kas/masuk']								= 'transaksi/Kas_masuk';
+
+
+/*--------------------------------------------------
 LAPORAN Jurnal Umum
 /--------------------------------------------------*/
 $route['akuntansi/jurnal_umum']				= 'laporan/Jurnal';
