@@ -95,7 +95,6 @@ class M_pembelian extends CI_Model
 				'id_warna'		=> $id_warna[$i],
 				'cogs'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i])),
 				'qty'			=> $this->input->post('qty')[$i],
-				'total'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i]) * $this->input->post('qty')[$i]),
 				'tipe'			=> 1
 			];
 		}

@@ -141,6 +141,14 @@ class M_penjualan extends CI_Model
 							'harga_jual'		=> $harga_jual,
 							'qty'			=> $stock
 						];
+						$tfifo[] = [
+
+							'id_transaksi'		=> $id_transaksi,
+							'id_warna'		=> $id_warna,
+							'qty'			=> 0,
+							'cogs'			=> $cogs
+
+						];
 						$stock_update[] = [
 							'id_pembelian'		=> $row['id_pembelian'],
 							'ready'			=> 0,
@@ -155,6 +163,14 @@ class M_penjualan extends CI_Model
 							'cogs'			=> $cogs,
 							'harga_jual'		=> $harga_jual,
 							'qty'			=> $qty + $stock
+						];
+						$tfifo[] = [
+
+							'id_transaksi'		=> $id_transaksi,
+							'id_warna'		=> $id_warna,
+							'qty'			=> $stock - $temp,
+							'cogs'			=> $cogs
+
 						];
 						$stock_update[] = [
 							'id_pembelian'		=> $row['id_pembelian'],
@@ -171,6 +187,7 @@ class M_penjualan extends CI_Model
 			// die;
 			$this->db->trans_start();
 			$this->db->insert_batch('penjualan', $sales);
+			$this->db->insert_batch('stok', $tfifo);
 			$this->db->update_batch('pembelian', $stock_update, 'id_pembelian');
 			$this->db->trans_complete();
 			$response = [
@@ -202,6 +219,7 @@ class M_penjualan extends CI_Model
 		// echo "</pre>";
 		// die;
 		$this->db->trans_start();
+		$this->db->delete('stok', ['id_transaksi' => $sales['id_transaksi'], 'id_warna' => $sales['id_warna']]);
 		$this->db->delete('penjualan', ['id_penjualan' => $id_penjualan]);
 		$this->db->update('pembelian', $updated, ['id_pembelian' => $id_pembelian]);
 		$this->db->trans_complete();
