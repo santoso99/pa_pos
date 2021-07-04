@@ -56,10 +56,16 @@
 							</div>
 						<?php endif ?>
 					<?php endif ?>
-
+					<button type="button" class="btn btn-info btn-sm mt-2 mb-2" data-toggle="modal" data-target="#Filter">
+						<i class="ion-ios-color-filter"></i>
+						Filter Periode Buku Besar
+					</button>
 					<div class="box">
-						<div class="box-header with-border">
+						<div class="box-header with-border text-center">
+							<h3>SG CELLULAR</h3>
 							<h4>Kartu Stok</h4>
+							<h6>"<?= $all['title'] ?>"</h6>
+							<h4>Periode <?= bulan($month) . ' ' . $year ?></h4>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
@@ -69,7 +75,7 @@
 										<tr>
 											<th rowspan="2">No Transaksi</th>
 											<th rowspan="2">Tanggal</th>
-											<th rowspan="2">Keterangan</th>
+
 											<th colspan="3" class="text-center">Pembelian</th>
 											<th colspan="3" class="text-center">Harga Pokok Penjualan</th>
 											<th colspan="3" class="text-center">Persediaan</th>
@@ -94,11 +100,11 @@
 
 											$purchase = 0;
 											$sales = 0;
-											foreach ($all as $f) : ?>
+											foreach ($all['data'] as $f) : ?>
 												<tr>
 													<td><?= $f['id_transaksi'] ?></td>
-													<td><?= date('d-m-Y H:i:s', strtotime($f['tanggal'])) ?></td>
-													<td><?= $f['nama_barang'] ?></td>
+													<td><?= date('d/m/Y', strtotime($f['tanggal'])) ?></td>
+
 													<?php if ($f['tipe'] == 'purchasing') : ?>
 
 														<td><?= $f['qty'] ?></td>
@@ -206,4 +212,42 @@
 </div>
 <!-- /.content-wrapper -->
 
+
+<!-- Modal -->
+<div class="modal modal-right fade" id="Filter">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Filter Periode</h5>
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="<?= site_url('inventory/fifo') ?>" method="GET">
+					<div class="form-group">
+						<label for="">Bulan:</label>
+						<input type="month" name="periode" id="" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="">Produk</label>
+						<select name="id" class="form-control select2" style="width: 100%;" required>
+							<option value="">-pilih akun-</option>
+							<?php foreach ($produk as $p) : ?>
+								<option value="<?= $p['id_warna'] ?>">
+									<?= $p['nama_barang'] . ' ' . $p['memori'] . '-' . $p['nama_warna'] ?>
+								</option>
+							<?php endforeach ?>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary btn-sm mt-2 mb-2 float-right">Tampilkan</button>
+				</form>
+			</div>
+			<div class="modal-footer modal-footer-uniform">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.modal -->
 <?php $this->load->view('_partials/footer'); ?>

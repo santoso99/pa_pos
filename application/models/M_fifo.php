@@ -4,9 +4,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_fifo extends CI_Model
 {
-
-	public function all($y, $m)
+	public function produk()
 	{
+		$this->db->select('a.id_barang,a.nama_barang,a.memori,b.id_warna,b.nama_warna')
+			->from('barang as a')
+			->join('warna_barang as b', 'a.id_barang=b.id_barang');
+		return $this->db->get()->result_array();
+	}
+
+	public function all($y, $m, $id)
+	{
+		$desc = $this->db->select("concat(barang.nama_barang,barang.nama_barang,' ' ,barang.memori,' ',warna_barang.nama_warna) as nama_barang")
+			->from('barang as barang')
+			->join('warna_barang as warna_barang', 'barang.id_barang=warna_barang.id_barang')
+			->where('warna_barang.id_warna', $id)
+			->get()->row_array();
+
+
 		$db = $this->db->query("SELECT 
 			big_data.id_transaksi,
 			big_data.nama_barang,
@@ -19,18 +33,16 @@ class M_fifo extends CI_Model
 			big_data.qty,
 			big_data.cogs,
 			big_data.total,
-			big_data.tipe
-	FROM (
-	    SELECT
-	    purchase_table.id_transaksi,
-	    purchase_table.id_warna,
-	    concat(barang.nama_barang,barang.nama_barang,' ' ,barang.memori,' ',warna_barang.nama_warna) as nama_barang,
-	    purchase_table.tanggal,
-	    purchase_table.purch_qty as qty,
-	    purchase_table.harga_beli as cogs,
-	    purchase_table.purch_total as total,
-	    purchase_table.tipe,
-	    purchase_table.id_pembelian
+			big_data.tipe FROM ( SELECT
+			purchase_table.id_transaksi,
+			purchase_table.id_warna,
+			concat(barang.nama_barang,barang.nama_barang,' ' ,barang.memori,' ',warna_barang.nama_warna) as nama_barang,
+			purchase_table.tanggal,
+			purchase_table.purch_qty as qty,
+			purchase_table.harga_beli as cogs,
+			purchase_table.purch_total as total,
+			purchase_table.tipe,
+			purchase_table.id_pembelian
 		   FROM 
 			  barang
 		   JOIN warna_barang
@@ -43,9 +55,8 @@ class M_fifo extends CI_Model
 				 purchase.purch_qty,
 				 purchase.harga_beli,
 				 purchase.purch_total,
-				  transaksi.tipe,
-				  purchase.id_pembelian
-				  
+				transaksi.tipe,
+				purchase.id_pembelian
 			  FROM
 				 transaksi
 				 LEFT OUTER JOIN (
@@ -75,8 +86,7 @@ class M_fifo extends CI_Model
 			  (sales_table.sales_qty* sales_table.cogs) as total,
 			    sales_table.tipe,
 			    sales_table.id_pembelian
-		   FROM 
-			  barang
+		   FROM barang
 		   JOIN warna_barang
 			  ON barang.id_barang=warna_barang.id_barang
 		    JOIN (
@@ -106,16 +116,14 @@ class M_fifo extends CI_Model
 	    ) as  big_data
 	    LEFT OUTER JOIN pembelian 
 	    ON big_data.id_pembelian = pembelian.id_pembelian
+		WHERE big_data.id_warna = '$id' and month(big_data.tanggal) = '$m' and year(big_data.tanggal) = '$y'
 	    ORDER BY big_data.tanggal ASC")->result_array();
 
-		// foreach ($db as $value) {
-		// 	$data[$value['tipe']][$value['id_pembelian']][] = $value;
-		// }
-		// echo "<pre>";
-		// echo print_r($data);
-		// echo "</pre>";
-		// die;
-		return $db;
+		$response = [
+			'title'		=> $desc['nama_barang'],
+			'data'		=> $db
+		];
+		return $response;
 	}
 	public function stock()
 	{
@@ -140,6 +148,15 @@ class M_fifo extends CI_Model
 			->order_by('id_transaksi', 'DESC');
 		return $this->db->get()->result_array();
 	}
+
+	// public function try()
+	// {
+	// 	// $this->db->select('a.id_transaksi,a.id_warna,a.qty  as sisa,a.cogs as hpp,a.tipe as level,a.id_pembelian ')
+	// 	$this->db->select('*')
+	// 		->from('stok as a')
+	// 		->where('a.id_warna', '1');
+	// 	return $this->db->get()->result_array();
+	// }
 }
 
 /* End of file M_fifo.php */
