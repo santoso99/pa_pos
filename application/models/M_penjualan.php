@@ -49,7 +49,8 @@ class M_penjualan extends CI_Model
 	{
 		$data = [
 			'id_transaksi'		=> $this->id(),
-			'tipe'			=> 'order'
+			'periode'			=> date('Y') . '' . date('m'),
+			'tipe'				=> 'order'
 		];
 		$this->db->insert('transaksi', $data);
 		return $data;
@@ -135,50 +136,54 @@ class M_penjualan extends CI_Model
 						// stok pertama tidak cukup
 						$sales[] = [
 							'id_transaksi'		=> $id_transaksi,
+
 							'id_pembelian'		=> $row['id_pembelian'],
-							'id_warna'		=> $id_warna,
-							'cogs'			=> $cogs,
+							'id_warna'			=> $id_warna,
+							'cogs'				=> $cogs,
 							'harga_jual'		=> $harga_jual,
-							'qty'			=> $stock
+							'qty'				=> $stock
 						];
 						$tfifo[] = [
 
 							'id_transaksi'		=> $id_transaksi,
-							'id_warna'		=> $id_warna,
-							'qty'			=> 0,
-							'cogs'			=> $cogs,
-							'tipe'			=> 0,
+							'periode'			=> date('Y') . '' . date('m'),
+							'id_warna'			=> $id_warna,
+							'qty'				=> 0,
+							'cogs'				=> $cogs,
+							'tipe'				=> 0,
 							'id_pembelian'		=> $row['id_pembelian'],
 
 						];
 						$stock_update[] = [
 							'id_pembelian'		=> $row['id_pembelian'],
-							'ready'			=> 0,
+							'ready'				=> 0,
 						];
 						// end loop 3
 					} else {
 						// end last loop stok pertama cukup
 						$sales[] = [
 							'id_transaksi'		=> $id_transaksi,
+
 							'id_pembelian'		=> $row['id_pembelian'],
-							'id_warna'		=> $id_warna,
-							'cogs'			=> $cogs,
+							'id_warna'			=> $id_warna,
+							'cogs'				=> $cogs,
 							'harga_jual'		=> $harga_jual,
-							'qty'			=> $qty + $stock
+							'qty'				=> $qty + $stock
 						];
 						$tfifo[] = [
 
 							'id_transaksi'		=> $id_transaksi,
-							'id_warna'		=> $id_warna,
-							'qty'			=> $stock - $temp,
-							'cogs'			=> $cogs,
-							'tipe'			=> 0,
+							'periode'			=> date('Y') . '' . date('m'),
+							'id_warna'			=> $id_warna,
+							'qty'				=> $stock - $temp,
+							'cogs'				=> $cogs,
+							'tipe'				=> 0,
 							'id_pembelian'		=> $row['id_pembelian']
 
 						];
 						$stock_update[] = [
 							'id_pembelian'		=> $row['id_pembelian'],
-							'ready'			=>  $stock - $temp,
+							'ready'				=>  $stock - $temp,
 						];
 					}
 				}
@@ -197,7 +202,7 @@ class M_penjualan extends CI_Model
 			$response = [
 				'status'		=> 1,
 				'id_transaksi'	=> $id_transaksi,
-				'response'	=> 'success',
+				'response'		=> 'success',
 				'message'		=> 'Sukses menambahkan item !'
 			];
 			return $response;
@@ -228,10 +233,10 @@ class M_penjualan extends CI_Model
 		$this->db->update('pembelian', $updated, ['id_pembelian' => $id_pembelian]);
 		$this->db->trans_complete();
 		$response = [
-			'status'		=> 0,
-			'id_transaksi'	=> $sales['id_transaksi'],
-			'response'	=> 'success',
-			'message'		=> 'Item dihapus !'
+			'status'			=> 0,
+			'id_transaksi'		=> $sales['id_transaksi'],
+			'response'			=> 'success',
+			'message'			=> 'Item dihapus !'
 		];
 		return $response;
 	}
@@ -247,27 +252,30 @@ class M_penjualan extends CI_Model
 	{
 		$id_transaksi 			= $this->input->post('id_transaksi');
 		$id_pelanggan			= $this->input->post('id_pelanggan');
-		$keterangan			= $this->input->post('keterangan');
-		$total 				= intval(preg_replace("/[^0-9]/", "", $this->input->post('total')));
-		$sales				= $this->cogs($id_transaksi);
+		$keterangan				= $this->input->post('keterangan');
+		$total 					= intval(preg_replace("/[^0-9]/", "", $this->input->post('total')));
+		$sales					= $this->cogs($id_transaksi);
 
 		$transaksi = [
 			'id_transaksi'		=> $id_transaksi,
+			'periode'			=> date('Y') . '' . date('m'),
 			'id_pelanggan'		=> $id_pelanggan,
 			'status'			=> 1,
-			'total'			=> $total,
+			'total'				=> $total,
 			'keterangan'		=> $keterangan
 		];
 		$jurnal =
 			[
 				[
 					'account_no'		=> '1-10001',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'd',
 					'nominal'			=> $total,
 					'id_transaksi'		=> $id_transaksi
 				],
 				[
 					'account_no'		=> '4-10001',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'k',
 					'nominal'			=> $total,
 					'id_transaksi'		=> $id_transaksi
@@ -275,12 +283,14 @@ class M_penjualan extends CI_Model
 				# /.general ledger kas-penjualan
 				[
 					'account_no'		=> '6-10006',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'd',
 					'nominal'			=> $sales['cogs'],
 					'id_transaksi'		=> $id_transaksi
 				],
 				[
 					'account_no'		=> '1-10005',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'k',
 					'nominal'			=> $sales['cogs'],
 					'id_transaksi'		=> $id_transaksi
