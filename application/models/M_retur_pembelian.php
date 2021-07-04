@@ -25,6 +25,11 @@ class M_retur_pembelian extends CI_Model
         return $id;
     }
 
+    public function all()
+    {
+        return $this->db->get_where('transaksi', ['tipe' => 'purchase_return'])->result_array();
+    }
+
     public function get_pembelian()
     {
         return $this->db->get_where('transaksi', ['tipe' => 'purchasing'])->result_array();

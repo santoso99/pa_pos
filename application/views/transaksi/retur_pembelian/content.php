@@ -73,14 +73,21 @@
                                             <th>#</th>
                                             <th>No Transaksi</th>
                                             <th>Tanggal</th>
-                                            <th>Pelanggan</th>
+                                            <th>Keterangan</th>
                                             <th>Total</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php $no = 1;
+                                        foreach ($all as $rowData) : ?>
+                                            <tr>
+                                                <td><?= $no++ ?></td>
+                                                <td><?= $rowData['id_transaksi'] ?></td>
+                                                <td><?= date('d-m-Y', strtotime($rowData['tanggal'])) ?></td>
+                                                <td><?= $rowData['keterangan'] ?></td>
+                                                <td><?= nominal($rowData['total']) ?></td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
 

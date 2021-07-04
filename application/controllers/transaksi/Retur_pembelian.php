@@ -16,7 +16,8 @@ class Retur_pembelian extends CI_Controller
     public function index()
     {
         $data = [
-            'title'     => 'Retur Pembelian'
+            'title'             => 'Retur Pembelian',
+            'all'               => $this->model->all()
         ];
 
         $this->load->view('transaksi/retur_pembelian/content', $data);
