@@ -104,6 +104,13 @@ $route['retur/pembelian/find/(:any)']               = 'transaksi/Retur_pembelian
 $route['retur/pembelian/create']                    = 'transaksi/Retur_pembelian/create';
 $route['retur/pembelian/store']                     = 'transaksi/Retur_pembelian/store';
 
+/*--------------------------------------------------
+TRANSAKSI RETUR PENJUALAN
+/--------------------------------------------------*/
+$route['retur/penjualan']                           = 'transaksi/Retur_penjualan';
+$route['retur/penjualan/find/(:any)']               = 'transaksi/Retur_penjualan/find/$1';
+$route['retur/penjualan/create']                    = 'transaksi/Retur_penjualan/create';
+$route['retur/penjualan/store']                     = 'transaksi/Retur_penjualan/store';
 
 /*--------------------------------------------------
 LAPORAN Jurnal Umum

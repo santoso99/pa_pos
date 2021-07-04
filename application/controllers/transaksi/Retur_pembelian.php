@@ -43,7 +43,7 @@ class Retur_pembelian extends CI_Controller
     {
         $req = $this->model->store();
 
-        $this->session->set_flashdata('success', 'Data Kas Keluar berhasil ditambahkan !');
+        $this->session->set_flashdata('success', 'Data  berhasil ditambahkan !');
         redirect('retur/pembelian');
         // echo "<pre>";
         // print_r($req);
