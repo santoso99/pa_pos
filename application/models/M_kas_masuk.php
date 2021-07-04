@@ -52,18 +52,20 @@ class M_kas_masuk extends CI_Model
 		$jumlah	  = intval(preg_replace("/[^0-9]/", "", $this->input->post('jumlah')));
 		$keterangan = $this->input->post('keterangan');
 		$akun = $this->find_select($id_setting);
-
+		$periode = date('Y', strtotime($tanggal)) . '' . date('m', strtotime($tanggal));
 		$transaksi = [
 			'id_transaksi'			=> $id_transaksi,
+			'periode'				=> $periode,
 			'tanggal'				=> $tanggal,
-			'total'				=> $jumlah,
+			'total'					=> $jumlah,
 			'status'				=> 1,
-			'tipe'				=> 'cash_in',
+			'tipe'					=> 'cash_in',
 			'keterangan'			=> $keterangan
 		];
 		$gl = [
 			[
 				'account_no'		=> $akun['debet'],
+				'periode'			=> $periode,
 				'id_transaksi'		=> $id_transaksi,
 				'tanggal'			=> $tanggal,
 				'nominal'			=> $jumlah,
@@ -71,6 +73,7 @@ class M_kas_masuk extends CI_Model
 			],
 			[
 				'account_no'		=> $akun['kredit'],
+				'periode'			=> $periode,
 				'id_transaksi'		=> $id_transaksi,
 				'tanggal'			=> $tanggal,
 				'nominal'			=> $jumlah,

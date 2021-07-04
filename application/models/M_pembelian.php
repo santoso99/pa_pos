@@ -71,51 +71,55 @@ class M_pembelian extends CI_Model
 	public function store()
 	{
 		$validate = $this->validate_kas();
-		$saldo    = $validate['debet'] - $validate['kredit'];
+		$saldo    				= $validate['debet'] - $validate['kredit'];
 		$id_transaksi 			= $this->id();
 		$id_warna				= $this->input->post('id_warna');
-		$id_vendor			= $this->input->post('id_vendor');
-		$tipe				= "purchasing";
-		$keterangan			= $this->input->post('keterangan');
+		$id_vendor				= $this->input->post('id_vendor');
+		$tipe					= "purchasing";
+		$keterangan				= $this->input->post('keterangan');
 		$total = 0;
 		foreach ($id_warna as $key => $val) {
 			$detail[]	= [
-				'id_transaksi'	=> $id_transaksi,
-				'id_warna'	=> $id_warna[$key],
-				'cogs'		=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key])),
-				'qty'		=> $this->input->post('qty')[$key],
-				'ready'		=> $this->input->post('qty')[$key],
-				'total'		=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key]) * $this->input->post('qty')[$key])
+				'id_transaksi'		=> $id_transaksi,
+				'id_warna'			=> $id_warna[$key],
+				'cogs'				=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key])),
+				'qty'				=> $this->input->post('qty')[$key],
+				'ready'				=> $this->input->post('qty')[$key],
+				'total'				=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$key]) * $this->input->post('qty')[$key])
 			];
 			$total = $total + ($detail[$key]['total']);
 		}
 		foreach ($id_warna as $i => $val) {
 			$stok[] = [
 				'id_transaksi'		=> $id_transaksi,
-				'id_warna'		=> $id_warna[$i],
-				'cogs'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i])),
-				'qty'			=> $this->input->post('qty')[$i],
-				'tipe'			=> 1
+				'periode'			=> date('Y') . '' . date('m'),
+				'id_warna'			=> $id_warna[$i],
+				'cogs'				=> intval(preg_replace("/[^0-9]/", "", $this->input->post('cogs')[$i])),
+				'qty'				=> $this->input->post('qty')[$i],
+				'tipe'				=> 1
 			];
 		}
 		$transaksi = [
 			'id_transaksi'		=> $id_transaksi,
-			'id_vendor'		=> $id_vendor,
+			'periode'			=> date('Y') . '' . date('m'),
+			'id_vendor'			=> $id_vendor,
 			'status'			=> 1,
-			'total'			=> $total,
-			'tipe'			=> $tipe,
+			'total'				=> $total,
+			'tipe'				=> $tipe,
 			'keterangan'		=> $keterangan
 		];
 		$jurnal =
 			[
 				[
 					'account_no'		=> '1-10005',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'd',
 					'nominal'			=> $total,
 					'id_transaksi'		=> $id_transaksi
 				],
 				[
 					'account_no'		=> '1-10001',
+					'periode'			=> date('Y') . '' . date('m'),
 					'posisi'			=> 'k',
 					'nominal'			=> $total,
 					'id_transaksi'		=> $id_transaksi
