@@ -23,6 +23,6 @@
 <body class="hold-transition light-skin sidebar-mini theme-primary">
 
 	<div class="wrapper">
-		<div id="loader"></div>
+		<!-- <div id="loader"></div> -->
 		<?php $this->load->view('_partials/navbar'); ?>
 		<?php $this->load->view('_partials/sidebar'); ?>
