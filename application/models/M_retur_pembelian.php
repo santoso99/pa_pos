@@ -68,6 +68,15 @@ class M_retur_pembelian extends CI_Model
                 'id_warna'          => $id_warna[$key],
                 'cogs'              =>  intval(preg_replace("/[^0-9]/", "", $cogs[$key])),
                 'ready'             => $ready[$key] - $qty[$key]
+            ];
+
+            $stok[] = [
+                'id_transaksi'      => $id,
+                'id_warna'          => $id_warna[$key],
+                'periode'           => date('Y') . '' . date('m'),
+                'cogs'              =>  intval(preg_replace("/[^0-9]/", "", $cogs[$key])),
+                'qty'               => $ready[$key] - $qty[$key],
+                'tipe'              => 0, //out
 
             ];
 
@@ -114,6 +123,7 @@ class M_retur_pembelian extends CI_Model
         $this->db->insert_batch('retur_pembelian', $retur);
         $this->db->update_batch('pembelian', $pembelian, 'id_pembelian');
         $this->db->insert_batch('jurnal', $gl);
+        $this->db->insert_batch('stok', $stok);
         $this->db->trans_complete();
 
         $res = [
