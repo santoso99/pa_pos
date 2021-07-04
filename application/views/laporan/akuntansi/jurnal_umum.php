@@ -61,20 +61,20 @@
 						Filter Periode Jurnal
 					</button>
 					<div class="box">
-						<div class="box-header with-border">
+						<div class="box-header with-border text-center">
+							<h3>SG CELLULAR</h3>
 							<h4>Jurnal Umum</h4>
 							<p>Periode <?= bulan($month) . ' ' . $year ?></p>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<table class="table " style="width:100%">
-									<thead>
-										<tr>
-
-											<th>Tanggal</th>
+								<table class="table table-bordered " style="width:100%;">
+									<thead style="background-color: #0096c7;color:#fff">
+										<tr class="text-center">
+											<th style="width: 10%;">Tanggal</th>
 											<th>Keterangan</th>
-											<th>Ref</th>
+											<th style="width: 10%;">Ref</th>
 											<th>Debet</th>
 											<th>Kredit</th>
 										</tr>
@@ -119,6 +119,7 @@
 														</td>
 													</tr>
 												<?php endif ?>
+
 											<?php endforeach ?>
 										<?php endforeach ?>
 									</tbody>
