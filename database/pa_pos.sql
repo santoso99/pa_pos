@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 27, 2020 at 06:53 AM
+-- Generation Time: Jul 04, 2021 at 05:46 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -39,7 +39,8 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `id_brand`, `ram`, `memori`, `layar`, `os`, `deskripsi_barang`, `harga_satuan`, `foto_barang`) VALUES
-('MD-PR-000000001', 'Iphone 11 Pro Max', 'MD-KP-00001', 'MD-BR-00001', '4', '512', '6.7', 'IOS 14', 'Deskripsi Iphone 11 Pro Midnight Green 256 GB\r\nIphone 11 Pro Midnight Green 256 GB\r\nbatre health 85%\r\nmulus banget pemakaian pribadi .\r\nAcc tidak pernah di pakai sama sekali\r\nex singapore\r\nsemua simcard bisa', 23000000, '0d22801d3b7d02641a6d3409057da105.jpeg');
+('MD-PR-000000001', 'Iphone 11 Pro Max', 'MD-KP-00001', 'MD-BR-00001', '4', '512', '6.7', 'IOS 14', 'Deskripsi Iphone 11 Pro Midnight Green 256 GB\r\nIphone 11 Pro Midnight Green 256 GB\r\nbatre health 85%\r\nmulus banget pemakaian pribadi .\r\nAcc tidak pernah di pakai sama sekali\r\nex singapore\r\nsemua simcard bisa', 23000000, '0d22801d3b7d02641a6d3409057da105.jpeg'),
+('MD-PR-000000002', 'Iphone 12 ', 'MD-KP-00001', 'MD-BR-00001', '6', '128', '6', 'IOS 14', 'Iphone 12', 25000000, 'default.png');
 
 -- --------------------------------------------------------
 
@@ -98,6 +99,7 @@ INSERT INTO `chart_of_account` (`account_no`, `account_name`, `normal_balance`, 
 ('4-10001', 'Penjualan', 'k', '4-1'),
 ('4-10002', 'Potongan Penjualan', 'd', '4-1'),
 ('4-10003', 'Retur Penjualan', 'd', '4-1'),
+('4-10004', 'Retur Pembelian', 'k', '4-1'),
 ('4-20001', 'Pendapatan Bunga', 'k', '4-2'),
 ('5-10001', 'Beban Gaji Karyawan Kios', 'd', '5-1'),
 ('5-20001', 'Beban Listrik, Telepon dan Air', 'd', '5-2'),
@@ -149,7 +151,7 @@ INSERT INTO `coa_subhead` (`sub_code`, `sub_name`, `head_code`) VALUES
 ('2-1', 'Kewajiban Jangka Pendek', '2'),
 ('2-2', 'Kewajiban Jangka Panjang', '2'),
 ('3-1', 'Modal', '3'),
-('4-1', 'Pendapatan dari Penjualan', '4'),
+('4-1', 'Pendapatan dari penjualan', '4'),
 ('4-2', 'Pendapatan diluar Usaha', '4'),
 ('5-1', 'Beban Penjualan', '5'),
 ('5-2', 'Beban Administrasi dan Umum', '5'),
@@ -190,6 +192,7 @@ INSERT INTO `detail_setting_jurnal` (`id`, `id_setting`, `debet`, `kredit`) VALU
 
 CREATE TABLE `jurnal` (
   `id_jurnal` bigint(20) NOT NULL,
+  `periode` int(11) DEFAULT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `account_no` varchar(20) NOT NULL,
   `posisi` char(1) NOT NULL,
@@ -201,21 +204,53 @@ CREATE TABLE `jurnal` (
 -- Dumping data for table `jurnal`
 --
 
-INSERT INTO `jurnal` (`id_jurnal`, `tanggal`, `account_no`, `posisi`, `nominal`, `id_transaksi`) VALUES
-(1, '2020-12-26 17:00:00', '1-10001', 'd', 1000000000, 'TRX-KM-000000001'),
-(2, '2020-12-26 17:00:00', '3-10001', 'k', 1000000000, 'TRX-KM-000000001'),
-(3, '2020-12-27 06:08:35', '1-10005', 'd', 150000000, 'TRX-PO-000000001'),
-(4, '2020-12-27 06:08:35', '1-10001', 'k', 150000000, 'TRX-PO-000000001'),
-(5, '2020-12-27 06:11:43', '1-10001', 'd', 23000000, 'TRX-SO-000000002'),
-(6, '2020-12-27 06:11:43', '4-10001', 'k', 23000000, 'TRX-SO-000000002'),
-(7, '2020-12-27 06:11:43', '6-10006', 'd', 15000000, 'TRX-SO-000000002'),
-(8, '2020-12-27 06:11:43', '1-10005', 'k', 15000000, 'TRX-SO-000000002'),
-(9, '2020-12-27 06:14:38', '1-10005', 'd', 80000000, 'TRX-PO-000000002'),
-(10, '2020-12-27 06:14:38', '1-10001', 'k', 80000000, 'TRX-PO-000000002'),
-(11, '2020-12-27 06:17:58', '1-10001', 'd', 230000000, 'TRX-SO-000000001'),
-(12, '2020-12-27 06:17:58', '4-10001', 'k', 230000000, 'TRX-SO-000000001'),
-(13, '2020-12-27 06:17:58', '6-10006', 'd', 151000000, 'TRX-SO-000000001'),
-(14, '2020-12-27 06:17:58', '1-10005', 'k', 151000000, 'TRX-SO-000000001');
+INSERT INTO `jurnal` (`id_jurnal`, `periode`, `tanggal`, `account_no`, `posisi`, `nominal`, `id_transaksi`) VALUES
+(17, 202106, '2021-06-29 17:00:00', '1-10001', 'd', 1000000000, 'TRX-KM-000000001'),
+(18, 202106, '2021-06-29 17:00:00', '3-10002', 'k', 1000000000, 'TRX-KM-000000001'),
+(19, 202107, '2021-07-04 03:21:28', '1-10005', 'd', 170000000, 'TRX-PO-000000001'),
+(20, 202107, '2021-07-04 03:21:28', '1-10001', 'k', 170000000, 'TRX-PO-000000001'),
+(21, 202107, '2021-07-04 03:32:14', '1-10001', 'd', 23000000, 'TRX-SO-000000001'),
+(22, 202107, '2021-07-04 03:32:14', '4-10001', 'k', 23000000, 'TRX-SO-000000001'),
+(23, 202107, '2021-07-04 03:32:14', '6-10006', 'd', 17000000, 'TRX-SO-000000001'),
+(24, 202107, '2021-07-04 03:32:14', '1-10005', 'k', 17000000, 'TRX-SO-000000001'),
+(25, 202107, '2021-07-04 03:34:45', '1-10001', 'd', 23000000, 'TRX-SO-000000002'),
+(26, 202107, '2021-07-04 03:34:45', '4-10001', 'k', 23000000, 'TRX-SO-000000002'),
+(27, 202107, '2021-07-04 03:34:45', '6-10006', 'd', 17000000, 'TRX-SO-000000002'),
+(28, 202107, '2021-07-04 03:34:45', '1-10005', 'k', 17000000, 'TRX-SO-000000002'),
+(29, 202107, '2021-07-04 08:55:10', '1-10005', 'd', 269000000, 'TRX-PO-000000002'),
+(30, 202107, '2021-07-04 08:55:10', '1-10001', 'k', 269000000, 'TRX-PO-000000002'),
+(31, 202107, '2021-07-04 08:55:54', '1-10001', 'd', 25000000, 'TRX-SO-000000003'),
+(32, 202107, '2021-07-04 08:55:54', '4-10001', 'k', 25000000, 'TRX-SO-000000003'),
+(33, 202107, '2021-07-04 08:55:54', '6-10006', 'd', 23500000, 'TRX-SO-000000003'),
+(34, 202107, '2021-07-04 08:55:54', '1-10005', 'k', 23500000, 'TRX-SO-000000003'),
+(37, 202107, '2021-07-04 12:18:04', '1-10001', 'd', 25000000, 'TRX-SO-000000004'),
+(38, 202107, '2021-07-04 12:18:04', '4-10001', 'k', 25000000, 'TRX-SO-000000004'),
+(39, 202107, '2021-07-04 12:18:04', '6-10006', 'd', 23500000, 'TRX-SO-000000004'),
+(40, 202107, '2021-07-04 12:18:04', '1-10005', 'k', 23500000, 'TRX-SO-000000004'),
+(41, 202107, '2021-07-04 12:20:08', '1-10001', 'd', 25000000, 'TRX-SO-000000005'),
+(42, 202107, '2021-07-04 12:20:08', '4-10001', 'k', 25000000, 'TRX-SO-000000005'),
+(43, 202107, '2021-07-04 12:20:08', '6-10006', 'd', 23500000, 'TRX-SO-000000005'),
+(44, 202107, '2021-07-04 12:20:08', '1-10005', 'k', 23500000, 'TRX-SO-000000005'),
+(47, 202107, '2021-07-04 12:23:01', '1-10001', 'd', 64000000, 'TRX-PR-000000001'),
+(48, 202107, '2021-07-04 12:23:01', '1-10005', 'k', 64000000, 'TRX-PR-000000001'),
+(49, 202107, '2021-07-03 17:00:00', '5-10001', 'd', 15000000, 'TRX-KK-000000001'),
+(50, 202107, '2021-07-03 17:00:00', '1-10001', 'k', 15000000, 'TRX-KK-000000001'),
+(51, 202107, '2021-07-04 12:57:44', '1-10001', 'd', 23000000, 'TRX-SO-000000006'),
+(52, 202107, '2021-07-04 12:57:44', '4-10001', 'k', 23000000, 'TRX-SO-000000006'),
+(53, 202107, '2021-07-04 12:57:44', '6-10006', 'd', 17000000, 'TRX-SO-000000006'),
+(54, 202107, '2021-07-04 12:57:44', '1-10005', 'k', 17000000, 'TRX-SO-000000006'),
+(55, 202107, '2021-07-04 13:17:17', '4-10003', 'd', 23000000, 'TRX-SR-000000001'),
+(56, 202107, '2021-07-04 13:17:17', '1-10001', 'k', 23000000, 'TRX-SR-000000001'),
+(57, 202107, '2021-07-04 13:17:17', '1-10005', 'd', 17000000, 'TRX-SR-000000001'),
+(58, 202107, '2021-07-04 13:17:17', '6-10006', 'k', 17000000, 'TRX-SR-000000001'),
+(59, 202107, '2021-07-03 17:00:00', '5-20001', 'd', 1500000, 'TRX-KK-000000002'),
+(60, 202107, '2021-07-03 17:00:00', '1-10001', 'k', 1500000, 'TRX-KK-000000002'),
+(61, 202107, '2021-07-03 17:00:00', '5-20001', 'd', 500000, 'TRX-KK-000000003'),
+(62, 202107, '2021-07-03 17:00:00', '1-10001', 'k', 500000, 'TRX-KK-000000003'),
+(63, 202107, '2021-07-04 16:21:34', '1-10001', 'd', 25000000, 'TRX-SO-000000007'),
+(64, 202107, '2021-07-04 16:21:34', '4-10001', 'k', 25000000, 'TRX-SO-000000007'),
+(65, 202107, '2021-07-04 16:21:34', '6-10006', 'd', 23500000, 'TRX-SO-000000007'),
+(66, 202107, '2021-07-04 16:21:34', '1-10005', 'k', 23500000, 'TRX-SO-000000007');
 
 -- --------------------------------------------------------
 
@@ -238,6 +273,20 @@ INSERT INTO `kategori_barang` (`id_kategori`, `nama_kategori`) VALUES
 ('MD-KP-00003', 'Aksesoris Komputer & Laptop'),
 ('MD-KP-00004', 'Aksesoris Handphone'),
 ('MD-KP-00005', 'test2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lb_format`
+--
+
+CREATE TABLE `lb_format` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `account_no` varchar(20) NOT NULL,
+  `header` varchar(100) DEFAULT NULL,
+  `sub_header` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -283,8 +332,9 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `id_transaksi`, `tanggal`, `id_warna`, `cogs`, `qty`, `ready`, `total`) VALUES
-(1, 'TRX-PO-000000001', '2020-12-27 06:08:35', 1, 15000000, 10, 0, 150000000),
-(2, 'TRX-PO-000000002', '2020-12-27 06:14:38', 1, 16000000, 5, 4, 80000000);
+(4, 'TRX-PO-000000001', '2021-07-04 03:21:28', 1, 17000000, 10, 8, 170000000),
+(5, 'TRX-PO-000000002', '2021-07-04 08:55:10', 1, 17000000, 2, 1, 34000000),
+(6, 'TRX-PO-000000002', '2021-07-04 08:55:10', 2, 23500000, 10, 4, 235000000);
 
 -- --------------------------------------------------------
 
@@ -308,9 +358,62 @@ CREATE TABLE `penjualan` (
 --
 
 INSERT INTO `penjualan` (`id_penjualan`, `id_transaksi`, `id_warna`, `tanggal`, `id_pembelian`, `cogs`, `harga_jual`, `qty`) VALUES
-(1, 'TRX-SO-000000002', 1, '2020-12-27 06:10:25', 1, 15000000, 23000000, 1),
-(2, 'TRX-SO-000000001', 1, '2020-12-27 06:17:43', 1, 15000000, 23000000, 9),
-(3, 'TRX-SO-000000001', 1, '2020-12-27 06:17:43', 2, 16000000, 23000000, 1);
+(4, 'TRX-SO-000000001', 1, '2021-07-04 03:32:00', 4, 17000000, 23000000, 1),
+(5, 'TRX-SO-000000002', 1, '2021-07-04 03:34:36', 4, 17000000, 23000000, 1),
+(6, 'TRX-SO-000000003', 2, '2021-07-04 08:55:45', 6, 23500000, 25000000, 1),
+(7, 'TRX-SO-000000004', 2, '2021-07-04 12:17:53', 6, 23500000, 25000000, 1),
+(8, 'TRX-SO-000000005', 2, '2021-07-04 12:19:57', 6, 23500000, 25000000, 1),
+(9, 'TRX-SO-000000006', 1, '2021-07-04 12:57:34', 4, 17000000, 23000000, 1),
+(10, 'TRX-SO-000000007', 2, '2021-07-04 16:21:26', 6, 23500000, 25000000, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `retur_pembelian`
+--
+
+CREATE TABLE `retur_pembelian` (
+  `id_retur_pembelian` bigint(20) NOT NULL,
+  `id_transaksi` varchar(50) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_warna` bigint(20) NOT NULL,
+  `id_pembelian` bigint(20) NOT NULL,
+  `cogs` double NOT NULL,
+  `qty` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `retur_pembelian`
+--
+
+INSERT INTO `retur_pembelian` (`id_retur_pembelian`, `id_transaksi`, `tanggal`, `id_warna`, `id_pembelian`, `cogs`, `qty`) VALUES
+(5, 'TRX-PR-000000001', '2021-07-04 12:23:01', 1, 5, 17000000, 1),
+(6, 'TRX-PR-000000001', '2021-07-04 12:23:01', 2, 6, 23500000, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `retur_penjualan`
+--
+
+CREATE TABLE `retur_penjualan` (
+  `id_retur_penjualan` bigint(20) NOT NULL,
+  `id_transaksi` varchar(50) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_warna` bigint(20) NOT NULL,
+  `id_penjualan` bigint(20) NOT NULL,
+  `id_pembelian` bigint(20) NOT NULL,
+  `cogs` double NOT NULL,
+  `harga_jual` double NOT NULL,
+  `qty` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `retur_penjualan`
+--
+
+INSERT INTO `retur_penjualan` (`id_retur_penjualan`, `id_transaksi`, `tanggal`, `id_warna`, `id_penjualan`, `id_pembelian`, `cogs`, `harga_jual`, `qty`) VALUES
+(1, 'TRX-SR-000000001', '2021-07-04 13:17:17', 1, 9, 4, 17000000, 23000000, 1);
 
 -- --------------------------------------------------------
 
@@ -345,12 +448,13 @@ INSERT INTO `setting_jurnal` (`id_setting`, `setting_name`, `type`) VALUES
 
 CREATE TABLE `stok` (
   `id_stok` bigint(20) NOT NULL,
+  `periode` int(11) DEFAULT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_transaksi` varchar(50) NOT NULL,
   `id_warna` bigint(20) NOT NULL,
   `qty` int(11) NOT NULL,
   `cogs` double NOT NULL,
-  `tipe` int(1) NOT NULL DEFAULT '1',
+  `tipe` int(1) NOT NULL DEFAULT '1' COMMENT '1: Masuk, 0 : Keluar ',
   `id_pembelian` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -358,12 +462,20 @@ CREATE TABLE `stok` (
 -- Dumping data for table `stok`
 --
 
-INSERT INTO `stok` (`id_stok`, `tanggal`, `id_transaksi`, `id_warna`, `qty`, `cogs`, `tipe`, `id_pembelian`) VALUES
-(1, '2020-12-27 06:08:35', 'TRX-PO-000000001', 1, 10, 15000000, 1, NULL),
-(2, '2020-12-27 06:10:25', 'TRX-SO-000000002', 1, 9, 15000000, 0, 1),
-(3, '2020-12-27 06:14:38', 'TRX-PO-000000002', 1, 5, 16000000, 1, NULL),
-(4, '2020-12-27 06:17:43', 'TRX-SO-000000001', 1, 0, 15000000, 0, 1),
-(5, '2020-12-27 06:17:43', 'TRX-SO-000000001', 1, 4, 16000000, 0, 2);
+INSERT INTO `stok` (`id_stok`, `periode`, `tanggal`, `id_transaksi`, `id_warna`, `qty`, `cogs`, `tipe`, `id_pembelian`) VALUES
+(7, 202107, '2021-07-04 03:21:28', 'TRX-PO-000000001', 1, 10, 17000000, 1, NULL),
+(8, 202107, '2021-07-04 03:32:00', 'TRX-SO-000000001', 1, 9, 17000000, 0, 4),
+(9, 202107, '2021-07-04 03:34:36', 'TRX-SO-000000002', 1, 8, 17000000, 0, 4),
+(10, 202107, '2021-07-04 08:55:10', 'TRX-PO-000000002', 1, 2, 17000000, 1, NULL),
+(11, 202107, '2021-07-04 08:55:10', 'TRX-PO-000000002', 2, 10, 23500000, 1, NULL),
+(12, 202107, '2021-07-04 08:55:45', 'TRX-SO-000000003', 2, 9, 23500000, 0, 6),
+(13, 202107, '2021-07-04 12:17:53', 'TRX-SO-000000004', 2, 8, 23500000, 0, 6),
+(14, 202107, '2021-07-04 12:19:57', 'TRX-SO-000000005', 2, 7, 23500000, 0, 6),
+(15, 202107, '2021-07-04 12:23:01', 'TRX-PR-000000001', 1, 1, 17000000, 0, NULL),
+(16, 202107, '2021-07-04 12:23:01', 'TRX-PR-000000001', 2, 5, 23500000, 0, NULL),
+(17, 202107, '2021-07-04 12:57:34', 'TRX-SO-000000006', 1, 7, 17000000, 0, 4),
+(18, 202107, '2021-07-04 13:17:17', 'TRX-SR-000000001', 1, 8, 17000000, 1, NULL),
+(19, 202107, '2021-07-04 16:21:26', 'TRX-SO-000000007', 2, 4, 23500000, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -373,9 +485,11 @@ INSERT INTO `stok` (`id_stok`, `tanggal`, `id_transaksi`, `id_warna`, `qty`, `co
 
 CREATE TABLE `transaksi` (
   `id_transaksi` varchar(50) NOT NULL,
+  `periode` int(11) DEFAULT NULL,
   `id_vendor` varchar(20) DEFAULT NULL,
   `id_pelanggan` varchar(20) DEFAULT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ref` varchar(50) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `total` double DEFAULT NULL,
   `tipe` varchar(100) NOT NULL,
@@ -386,12 +500,22 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_vendor`, `id_pelanggan`, `tanggal`, `status`, `total`, `tipe`, `keterangan`) VALUES
-('TRX-KM-000000001', NULL, NULL, '2020-12-26 17:00:00', 1, 1000000000, 'cash_in', 'Setoran Modal Pemilik'),
-('TRX-PO-000000001', 'MD-VN-00001', NULL, '2020-12-27 06:08:35', 1, 150000000, 'purchasing', 'Pembelian Baru Inter termasuk bea cukai dan PPN'),
-('TRX-PO-000000002', 'MD-VN-00001', NULL, '2020-12-27 06:14:38', 1, 80000000, 'purchasing', 'Pembelian Ke 2'),
-('TRX-SO-000000001', NULL, 'MD-PL-00002', '2020-12-27 06:17:58', 1, 230000000, 'order', 'Pembelian Reseller'),
-('TRX-SO-000000002', NULL, 'MD-PL-00001', '2020-12-27 06:11:43', 1, 23000000, 'order', 'Penjualan kepada Tn X Full Waranty');
+INSERT INTO `transaksi` (`id_transaksi`, `periode`, `id_vendor`, `id_pelanggan`, `tanggal`, `ref`, `status`, `total`, `tipe`, `keterangan`) VALUES
+('TRX-KK-000000001', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 15000000, 'cash_out', 'Pembayaran Gaji Karyawan Counter'),
+('TRX-KK-000000002', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 1500000, 'cash_out', 'Bayar Listrik'),
+('TRX-KK-000000003', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 500000, 'cash_out', 'Bayar Listrik Counter'),
+('TRX-KM-000000001', 202106, NULL, NULL, '2021-06-29 17:00:00', NULL, 1, 1000000000, 'cash_in', 'Saldo Awal'),
+('TRX-PO-000000001', 202107, 'MD-VN-00001', NULL, '2021-07-04 03:21:28', NULL, 1, 170000000, 'purchasing', 'Pembelian 1'),
+('TRX-PO-000000002', 202107, 'MD-VN-00001', NULL, '2021-07-04 08:55:10', NULL, 1, 269000000, 'purchasing', 'Pembelian 2'),
+('TRX-PR-000000001', 202107, NULL, NULL, '2021-07-04 12:23:01', 'TRX-PO-000000002', 1, 64000000, 'purchase_return', 'Retur 1'),
+('TRX-SO-000000001', 202107, NULL, 'MD-PL-00001', '2021-07-04 03:30:52', NULL, 1, 23000000, 'order', 'Penjualan 1'),
+('TRX-SO-000000002', 202107, NULL, 'MD-PL-00002', '2021-07-04 03:34:30', NULL, 1, 23000000, 'order', 'Penjualan 2'),
+('TRX-SO-000000003', 202107, NULL, 'MD-PL-00001', '2021-07-04 08:26:51', NULL, 1, 25000000, 'order', 'Penjualan 3'),
+('TRX-SO-000000004', 202107, NULL, 'MD-PL-00001', '2021-07-04 12:17:42', NULL, 1, 25000000, 'order', 'Penjualan Ke 4'),
+('TRX-SO-000000005', 202107, NULL, 'MD-PL-00002', '2021-07-04 12:19:43', NULL, 1, 25000000, 'order', 'Penjualan Ke 5'),
+('TRX-SO-000000006', 202107, NULL, 'MD-PL-00002', '2021-07-04 12:57:27', NULL, 1, 23000000, 'order', 'Penjualan 6'),
+('TRX-SO-000000007', 202107, NULL, 'MD-PL-00001', '2021-07-04 16:21:11', NULL, 1, 25000000, 'order', 'Penjualan Ke 7'),
+('TRX-SR-000000001', 202107, NULL, NULL, '2021-07-04 13:17:17', 'TRX-SO-000000006', 1, 23000000, 'sales_return', 'Retur Penjualan 1');
 
 -- --------------------------------------------------------
 
@@ -431,7 +555,8 @@ CREATE TABLE `warna_barang` (
 --
 
 INSERT INTO `warna_barang` (`id_warna`, `nama_warna`, `id_barang`) VALUES
-(1, 'Midnight Green', 'MD-PR-000000001');
+(1, 'Midnight Green', 'MD-PR-000000001'),
+(2, 'Ocean Blue', 'MD-PR-000000002');
 
 --
 -- Indexes for dumped tables
@@ -495,6 +620,13 @@ ALTER TABLE `kategori_barang`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
+-- Indexes for table `lb_format`
+--
+ALTER TABLE `lb_format`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `account_no` (`account_no`);
+
+--
 -- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
@@ -516,6 +648,23 @@ ALTER TABLE `penjualan`
   ADD KEY `id_pembelian` (`id_pembelian`),
   ADD KEY `id_warna` (`id_warna`),
   ADD KEY `id_transaksi` (`id_transaksi`);
+
+--
+-- Indexes for table `retur_pembelian`
+--
+ALTER TABLE `retur_pembelian`
+  ADD PRIMARY KEY (`id_retur_pembelian`),
+  ADD KEY `id_transaksi` (`id_transaksi`),
+  ADD KEY `id_pembelian` (`id_pembelian`);
+
+--
+-- Indexes for table `retur_penjualan`
+--
+ALTER TABLE `retur_penjualan`
+  ADD PRIMARY KEY (`id_retur_penjualan`),
+  ADD KEY `id_transaksi` (`id_transaksi`),
+  ADD KEY `id_penjualan` (`id_penjualan`),
+  ADD KEY `id_pembelian` (`id_pembelian`);
 
 --
 -- Indexes for table `setting_jurnal`
@@ -566,31 +715,49 @@ ALTER TABLE `detail_setting_jurnal`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
+-- AUTO_INCREMENT for table `lb_format`
+--
+ALTER TABLE `lb_format`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pembelian` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `retur_pembelian`
+--
+ALTER TABLE `retur_pembelian`
+  MODIFY `id_retur_pembelian` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `retur_penjualan`
+--
+ALTER TABLE `retur_penjualan`
+  MODIFY `id_retur_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
-  MODIFY `id_stok` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_stok` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `warna_barang`
 --
 ALTER TABLE `warna_barang`
-  MODIFY `id_warna` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_warna` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -631,26 +798,47 @@ ALTER TABLE `jurnal`
   ADD CONSTRAINT `jurnal_ibfk_2` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `lb_format`
+--
+ALTER TABLE `lb_format`
+  ADD CONSTRAINT `lb_format_ibfk_1` FOREIGN KEY (`account_no`) REFERENCES `chart_of_account` (`account_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pembelian_ibfk_2` FOREIGN KEY (`id_warna`) REFERENCES `warna_barang` (`id_warna`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  ADD CONSTRAINT `penjualan_ibfk_1` FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`),
+  ADD CONSTRAINT `penjualan_ibfk_1` FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `penjualan_ibfk_2` FOREIGN KEY (`id_warna`) REFERENCES `warna_barang` (`id_warna`),
-  ADD CONSTRAINT `penjualan_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE;
+  ADD CONSTRAINT `penjualan_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `retur_pembelian`
+--
+ALTER TABLE `retur_pembelian`
+  ADD CONSTRAINT `retur_pembelian_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_pembelian_ibfk_2` FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `retur_penjualan`
+--
+ALTER TABLE `retur_penjualan`
+  ADD CONSTRAINT `retur_penjualan_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_penjualan_ibfk_2` FOREIGN KEY (`id_penjualan`) REFERENCES `penjualan` (`id_penjualan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_penjualan_ibfk_3` FOREIGN KEY (`id_pembelian`) REFERENCES `pembelian` (`id_pembelian`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `stok`
 --
 ALTER TABLE `stok`
-  ADD CONSTRAINT `stok_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`),
-  ADD CONSTRAINT `stok_ibfk_2` FOREIGN KEY (`id_warna`) REFERENCES `warna_barang` (`id_warna`);
+  ADD CONSTRAINT `stok_ibfk_1` FOREIGN KEY (`id_transaksi`) REFERENCES `transaksi` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `stok_ibfk_2` FOREIGN KEY (`id_warna`) REFERENCES `warna_barang` (`id_warna`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi`
