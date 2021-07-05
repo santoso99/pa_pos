@@ -22,6 +22,15 @@ class Dashboard extends CI_Controller
 		];
 		$this->load->view('dashboard', $data);
 	}
+
+	public function test_menu()
+	{
+		$id = '1';
+
+		$req = get_menu($id);
+
+		echo json_encode($req);
+	}
 }
 
 /* End of file Dashboard.php */
