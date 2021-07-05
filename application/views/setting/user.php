@@ -16,7 +16,7 @@
                                     </a>
                                 </li>
                                 <li class="breadcrumb-item">Relasi</li>
-                                <li class="breadcrumb-item" aria-current="page">Vendor</li>
+                                <li class="breadcrumb-item" aria-current="page">Pengguna</li>
                             </ol>
                         </nav>
                     </div>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 <div class="modal-footer float-right">
-                    <button type="button" class="btn btn-secondary" id="btn-close">Batal</button>
+                    <button type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" id="btn-submit">Simpan</button>
                 </div>
             </form>

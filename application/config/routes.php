@@ -10,6 +10,7 @@ $route['default_controller'] = 'Dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['login']      = 'Auth';
 $route['menu/test']  = 'Dashboard/test_menu';
 
 
