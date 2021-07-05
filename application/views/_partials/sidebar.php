@@ -10,7 +10,7 @@
 					<span>Dashboard</span>
 				</a>
 			</li>
-			<?php $menu = get_menu(1); ?>
+			<?php $menu = get_menu($this->session->userdata('role_id')); ?>
 
 			<?php foreach ($menu as $row) : ?>
 				<li class="treeview">
