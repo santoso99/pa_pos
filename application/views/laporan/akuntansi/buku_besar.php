@@ -160,8 +160,8 @@
 					</div>
 					<div class="form-group">
 						<label for="">Akun</label>
-						<select name="account_name" class="form-control select2" style="width: 100%;" required>
-							<option value="">-pilih akun-</option>
+						<select name="account_no" class="form-control select2" style="width: 100%;">
+							<option value="all">-pilih akun-</option>
 							<?php foreach ($list_akun as $ls) : ?>
 								<option value="<?= $ls['account_no'] ?>"> <?= $ls['account_no'] . ' ' . $ls['account_name'] ?> </option>
 							<?php endforeach ?>
