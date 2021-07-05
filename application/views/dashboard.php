@@ -12,7 +12,9 @@
 								<div class="d-md-flex align-items-center mb-30 mb-lg-0">
 									<img src="<?= base_url() ?>assets/images/svg-icon/color-svg/custom-14.svg" class="img-fluid max-w-150" alt="" />
 									<div class="ml-30">
-										<h4 class="mb-10">Selamat Datang, Neng Aul !</h4>
+										<?php $profile = getProfile($this->session->userdata('user_id')) ?>
+
+										<h4 class="mb-10">Selamat Datang, <?= $profile['name'] ?> !</h4>
 										<p class="mb-0 text-fade">Hari ini adalah hari yang tepat untuk melakukan kegiatan yang produktif. </p>
 									</div>
 								</div>

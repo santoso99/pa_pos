@@ -33,10 +33,10 @@
 					</a>
 					<ul class="dropdown-menu animated flipInX">
 						<li class="user-body">
-							<a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i> Profil</a>
-							<a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i> Pengaturan</a>
+							<!-- <a class="dropdown-item" href="#"><i class="ti-user text-muted mr-2"></i> Profil</a> -->
+							<!-- <a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i> Pengaturan</a> -->
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><i class="ti-lock text-muted mr-2"></i> Logout</a>
+							<a class="dropdown-item" href="<?= site_url('logout') ?>"><i class="ti-lock text-muted mr-2"></i> Logout</a>
 						</li>
 					</ul>
 				</li>
