@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 05, 2021 at 04:22 AM
+-- Generation Time: Jul 05, 2021 at 06:20 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -295,6 +295,46 @@ CREATE TABLE `lb_format` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `menu_access`
+--
+
+CREATE TABLE `menu_access` (
+  `id` bigint(20) NOT NULL,
+  `tcode` varchar(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `menu_access`
+--
+
+INSERT INTO `menu_access` (`id`, `tcode`, `role_id`, `created_at`, `updated_at`) VALUES
+(1, 'MP01', 1, '2021-07-05 05:00:04', NULL),
+(2, 'MP02', 1, '2021-07-05 05:00:04', NULL),
+(3, 'MP03', 1, '2021-07-05 05:00:04', NULL),
+(4, 'MA01', 1, '2021-07-05 05:00:47', NULL),
+(5, 'MR01', 1, '2021-07-05 05:01:23', NULL),
+(6, 'MR02', 1, '2021-07-05 05:01:23', NULL),
+(7, 'TJ01', 1, '2021-07-05 05:02:43', NULL),
+(8, 'TJ02', 1, '2021-07-05 05:02:43', NULL),
+(9, 'TP01', 1, '2021-07-05 05:03:14', NULL),
+(10, 'TP02', 1, '2021-07-05 05:03:14', NULL),
+(11, 'TK01', 1, '2021-07-05 05:04:03', NULL),
+(12, 'TK02', 1, '2021-07-05 05:04:03', NULL),
+(13, 'LA01', 1, '2021-07-05 05:05:56', NULL),
+(14, 'LA02', 1, '2021-07-05 05:05:56', NULL),
+(15, 'LA03', 1, '2021-07-05 05:05:56', NULL),
+(16, 'LA04', 1, '2021-07-05 05:05:56', NULL),
+(17, 'LI01', 1, '2021-07-05 05:05:56', NULL),
+(18, 'LI02', 1, '2021-07-05 05:05:56', NULL),
+(19, 'LI03', 1, '2021-07-05 05:05:56', NULL),
+(20, 'ST01', 1, '2021-07-05 05:06:28', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menu_head`
 --
 
@@ -307,6 +347,21 @@ CREATE TABLE `menu_head` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `menu_head`
+--
+
+INSERT INTO `menu_head` (`head_id`, `head_name`, `icon`, `id`, `nu`, `created_at`, `updated_at`) VALUES
+(1, 'Master Produk', 'icon-Box3', 'master-produk', 1, '2021-07-05 04:30:55', NULL),
+(2, 'Master Akuntansi', 'icon-Bullet-list', 'master-akuntansi', 2, '2021-07-05 04:30:55', NULL),
+(3, 'Relasi', 'icon-Share1', 'master-relasi', 3, '2021-07-05 04:30:55', NULL),
+(4, 'Pembelian', 'icon-Cart2', 'transaksi-pembelian', 4, '2021-07-05 04:30:55', NULL),
+(5, 'Penjualan', 'icon-Cart', 'transaksi-penjualan', 5, '2021-07-05 04:30:55', NULL),
+(6, 'Kas Umum', 'icon-Commit', 'transksi-kas', 6, '2021-07-05 04:30:55', NULL),
+(7, 'Akuntansi', 'icon-Library', 'laporan-akuntansi', 7, '2021-07-05 04:30:55', '2021-07-05 04:31:22'),
+(8, 'Inventory', 'icon-Book', 'laporan-inventory', 8, '2021-07-05 04:30:55', NULL),
+(9, 'Setting', 'ti-settings', 'setting', 9, '2021-07-05 04:37:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -323,6 +378,32 @@ CREATE TABLE `menu_item` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `menu_item`
+--
+
+INSERT INTO `menu_item` (`tcode`, `nu`, `menu_name`, `url`, `head_id`, `created_at`, `updated_at`) VALUES
+('LA01', 1, 'Jurnal Umum', 'akuntansi/jurnal_umum', 7, '2021-07-05 04:51:02', NULL),
+('LA02', 2, 'Buku Besar', 'akuntansi/buku_besar', 7, '2021-07-05 04:51:02', NULL),
+('LA03', 3, 'Laba Rugi', 'akuntansi/lb', 7, '2021-07-05 04:51:02', NULL),
+('LA04', 4, 'Neraca Saldo', 'akuntansi/neraca_saldo', 7, '2021-07-05 04:51:02', NULL),
+('LI01', 1, 'Pembelian', 'inventory/pembelian', 8, '2021-07-05 04:53:29', NULL),
+('LI02', 2, 'Penjualan', 'inventory/penjualan', 8, '2021-07-05 04:53:29', NULL),
+('LI03', 3, 'Kartu Stok', 'inventory/fifo', 8, '2021-07-05 04:53:29', NULL),
+('MA01', 1, 'Akun', 'master/coa', 2, '2021-07-05 04:42:16', NULL),
+('MP01', 1, 'Brand Produk', 'master/brand', 1, '2021-07-05 04:41:07', NULL),
+('MP02', 2, 'Kategori Produk', 'master/kategori', 1, '2021-07-05 04:41:07', NULL),
+('MP03', 3, 'Produk', 'naster/produk', 1, '2021-07-05 04:41:07', NULL),
+('MR01', 1, 'Vendor', 'master/vendor', 3, '2021-07-05 04:43:31', NULL),
+('MR02', 2, 'Pelanggan', 'master/pelanggan', 3, '2021-07-05 04:43:31', NULL),
+('ST01', 1, 'Pengguna', 'setting/pengguna', 9, '2021-07-05 04:54:16', NULL),
+('TJ01', 1, 'Penjualan', 'transaksi/penjualan', 5, '2021-07-05 04:46:55', NULL),
+('TJ02', 2, 'Retur Penjualan', 'retur/penjualan', 5, '2021-07-05 04:46:55', NULL),
+('TK01', 1, 'Kas Masuk', 'kas/masuk', 6, '2021-07-05 04:47:51', NULL),
+('TK02', 2, 'Kas Keluar', 'kas/keluar', 6, '2021-07-05 04:47:51', NULL),
+('TP01', 1, 'Pembelian', 'transaksi/pembelian', 4, '2021-07-05 04:45:24', NULL),
+('TP02', 2, 'Retur Pembelian', 'retur/pembelian', 4, '2021-07-05 04:45:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -596,6 +677,15 @@ CREATE TABLE `users` (
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `username`, `password`, `role`, `status`, `date_created`) VALUES
+(1, 'Admin', 'admin', '$2y$10$inYyr0FUiMwBgIJgPEqD/.yx/CvghHDayF6qfaFoL8H5rYfGEMNPu', 1, 1, '2021-07-05 05:45:32'),
+(2, 'Pemilik', 'pemilik', '$2y$10$Kl4aukKsLsfQIfnF.Ra5c.vzuy3nVuIFfkLtaUXYu/huTQSVfIN1i', 2, 1, '2021-07-05 05:47:49'),
+(3, 'Kepala Toko Updated Test', 'kepala_toko', '$2y$10$5/aMNM.KSf6ma9lUmibA3O9a9P28X9XK65oI9BFNEFg5uvTnjLWMC', 3, 1, '2021-07-05 05:49:04');
+
 -- --------------------------------------------------------
 
 --
@@ -704,6 +794,14 @@ ALTER TABLE `kategori_barang`
 ALTER TABLE `lb_format`
   ADD PRIMARY KEY (`id`),
   ADD KEY `account_no` (`account_no`);
+
+--
+-- Indexes for table `menu_access`
+--
+ALTER TABLE `menu_access`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tcode` (`tcode`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `menu_head`
@@ -829,10 +927,16 @@ ALTER TABLE `lb_format`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `menu_access`
+--
+ALTER TABLE `menu_access`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `menu_head`
 --
 ALTER TABLE `menu_head`
-  MODIFY `head_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `head_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
@@ -874,7 +978,7 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `warna_barang`
@@ -925,6 +1029,13 @@ ALTER TABLE `jurnal`
 --
 ALTER TABLE `lb_format`
   ADD CONSTRAINT `lb_format_ibfk_1` FOREIGN KEY (`account_no`) REFERENCES `chart_of_account` (`account_no`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `menu_access`
+--
+ALTER TABLE `menu_access`
+  ADD CONSTRAINT `menu_access_ibfk_1` FOREIGN KEY (`tcode`) REFERENCES `menu_item` (`tcode`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `menu_access_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 
 --
 -- Constraints for table `menu_item`
