@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 05, 2021 at 06:20 AM
+-- Generation Time: Jul 05, 2021 at 06:53 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -103,6 +103,7 @@ INSERT INTO `chart_of_account` (`account_no`, `account_name`, `normal_balance`, 
 ('4-20001', 'Pendapatan Bunga', 'k', '4-2'),
 ('5-10001', 'Beban Gaji Karyawan Kios', 'd', '5-1'),
 ('5-20001', 'Beban Listrik, Telepon dan Air', 'd', '5-2'),
+('5-20002', 'Beban ATK', 'd', '5-2'),
 ('6-10006', 'Harga Pokok Penjualan', 'd', '6-1');
 
 -- --------------------------------------------------------
@@ -182,7 +183,8 @@ INSERT INTO `detail_setting_jurnal` (`id`, `id_setting`, `debet`, `kredit`) VALU
 (4, 'STT-0004', '1-10001', '2-20001'),
 (5, 'STT-0005', '2-20001', '1-10001'),
 (6, 'STT-0006', '5-10001', '1-10001'),
-(7, 'STT-0007', '5-20001', '1-10001');
+(7, 'STT-0007', '5-20001', '1-10001'),
+(8, 'STT-0008', '5-20002', '1-10001');
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,9 @@ INSERT INTO `jurnal` (`id_jurnal`, `periode`, `tanggal`, `account_no`, `posisi`,
 (67, 202107, '2021-07-05 03:14:56', '1-10001', 'd', 23000000, 'TRX-SO-000000008'),
 (68, 202107, '2021-07-05 03:14:56', '4-10001', 'k', 23000000, 'TRX-SO-000000008'),
 (69, 202107, '2021-07-05 03:14:56', '6-10006', 'd', 17000000, 'TRX-SO-000000008'),
-(70, 202107, '2021-07-05 03:14:56', '1-10005', 'k', 17000000, 'TRX-SO-000000008');
+(70, 202107, '2021-07-05 03:14:56', '1-10005', 'k', 17000000, 'TRX-SO-000000008'),
+(71, 202107, '2021-07-04 17:00:00', '5-20002', 'd', 1000000, 'TRX-KK-000000004'),
+(72, 202107, '2021-07-04 17:00:00', '1-10001', 'k', 1000000, 'TRX-KK-000000004');
 
 -- --------------------------------------------------------
 
@@ -330,7 +334,8 @@ INSERT INTO `menu_access` (`id`, `tcode`, `role_id`, `created_at`, `updated_at`)
 (17, 'LI01', 1, '2021-07-05 05:05:56', NULL),
 (18, 'LI02', 1, '2021-07-05 05:05:56', NULL),
 (19, 'LI03', 1, '2021-07-05 05:05:56', NULL),
-(20, 'ST01', 1, '2021-07-05 05:06:28', NULL);
+(20, 'ST01', 1, '2021-07-05 05:06:28', NULL),
+(21, 'MP01', 2, '2021-07-05 06:36:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,7 +399,7 @@ INSERT INTO `menu_item` (`tcode`, `nu`, `menu_name`, `url`, `head_id`, `created_
 ('MA01', 1, 'Akun', 'master/coa', 2, '2021-07-05 04:42:16', NULL),
 ('MP01', 1, 'Brand Produk', 'master/brand', 1, '2021-07-05 04:41:07', NULL),
 ('MP02', 2, 'Kategori Produk', 'master/kategori', 1, '2021-07-05 04:41:07', NULL),
-('MP03', 3, 'Produk', 'naster/produk', 1, '2021-07-05 04:41:07', NULL),
+('MP03', 3, 'Produk', 'master/produk', 1, '2021-07-05 04:41:07', NULL),
 ('MR01', 1, 'Vendor', 'master/vendor', 3, '2021-07-05 04:43:31', NULL),
 ('MR02', 2, 'Pelanggan', 'master/pelanggan', 3, '2021-07-05 04:43:31', NULL),
 ('ST01', 1, 'Pengguna', 'setting/pengguna', 9, '2021-07-05 04:54:16', NULL),
@@ -579,7 +584,8 @@ INSERT INTO `setting_jurnal` (`id_setting`, `setting_name`, `type`) VALUES
 ('STT-0004', 'Pencairan Dana Pinjaman Jangka Panjang Bank Mandiri (Tunai)', 'cash_in'),
 ('STT-0005', 'Bayar Angsuran Pinjaman Bank Mandiri', 'cash_out'),
 ('STT-0006', 'Bayar Gaji Karyawan', 'cash_out'),
-('STT-0007', 'Bayar Listrik, telepon atau air', 'cash_out');
+('STT-0007', 'Bayar Listrik, telepon atau air', 'cash_out'),
+('STT-0008', 'Pembelian ATK', 'cash_out');
 
 -- --------------------------------------------------------
 
@@ -646,6 +652,7 @@ INSERT INTO `transaksi` (`id_transaksi`, `periode`, `id_vendor`, `id_pelanggan`,
 ('TRX-KK-000000001', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 15000000, 'cash_out', 'Pembayaran Gaji Karyawan Counter'),
 ('TRX-KK-000000002', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 1500000, 'cash_out', 'Bayar Listrik'),
 ('TRX-KK-000000003', 202107, NULL, NULL, '2021-07-03 17:00:00', NULL, 1, 500000, 'cash_out', 'Bayar Listrik Counter'),
+('TRX-KK-000000004', 202107, NULL, NULL, '2021-07-04 17:00:00', NULL, 1, 1000000, 'cash_out', 'Pembelian ATK'),
 ('TRX-KM-000000001', 202106, NULL, NULL, '2021-06-29 17:00:00', NULL, 1, 1000000000, 'cash_in', 'Saldo Awal'),
 ('TRX-PO-000000001', 202107, 'MD-VN-00001', NULL, '2021-07-04 03:21:28', NULL, 1, 170000000, 'purchasing', 'Pembelian 1'),
 ('TRX-PO-000000002', 202107, 'MD-VN-00001', NULL, '2021-07-04 08:55:10', NULL, 1, 269000000, 'purchasing', 'Pembelian 2'),
@@ -912,13 +919,13 @@ ALTER TABLE `warna_barang`
 -- AUTO_INCREMENT for table `detail_setting_jurnal`
 --
 ALTER TABLE `detail_setting_jurnal`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `lb_format`
@@ -930,7 +937,7 @@ ALTER TABLE `lb_format`
 -- AUTO_INCREMENT for table `menu_access`
 --
 ALTER TABLE `menu_access`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `menu_head`
