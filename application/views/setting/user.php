@@ -118,7 +118,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Vendor</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Pengguna</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -148,7 +148,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="modal-footer text-right">
+                <div class="modal-footer float-right">
                     <button type="button" class="btn btn-secondary" id="btn-close">Batal</button>
                     <button type="submit" class="btn btn-primary" id="btn-submit">Simpan</button>
                 </div>
@@ -164,7 +164,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Vendor</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Pengguna</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
