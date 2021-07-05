@@ -153,3 +153,11 @@ $route['inventory/fifo/try']                    = 'laporan/Fifo/try';
 LAPORAN FIFO
 /--------------------------------------------------*/
 $route['akuntansi/lb']                        = 'laporan/Laba_rugi';
+
+
+/*--------------------------------------------------
+SETTING USER
+/--------------------------------------------------*/
+$route['setting/pengguna']                          = 'setting/User';
+$route['setting/pengguna/store']                    = 'setting/User/store';
+$route['setting/pengguna/update']                   = 'setting/User/update';
