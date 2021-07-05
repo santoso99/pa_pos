@@ -61,91 +61,70 @@
 						Filter Periode Buku Besar
 					</button>
 					<div class="box">
-						<div class="box-header with-border">
-							<h4>Buku Besar <?= $akun ?></h4>
+						<div class="box-header with-border text-center">
+							<h3>SG CELLULAR</h3>
+							<h4>Buku Besar</h4>
 							<p>Periode <?= bulan($month) . ' ' . $year ?></p>
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<table class="table " style="width:100%">
-									<thead>
-										<tr class="text-center">
-											<th rowspan="2">Tanggal</th>
-											<th rowspan="2">Keterangan</th>
-											<th rowspan="2">Ref</th>
-											<th rowspan="2">Debet</th>
-											<th rowspan="2">Kredit</th>
-											<th colspan="2">Saldo</th>
-										</tr>
-										<tr class="text-center">
-											<th>Debet</th>
-											<th>Kredit</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><?= '01-' . $month . '-' . $year . ' 00:00:00' ?></td>
-											<td><?= 'Saldo Awal ' . $akun ?></td>
-											<td colspan="3" class=" table-active "></td>
-											<td>
-												<span class="text-left">Rp</span>
-												<span style="float:right;">
-													<?= nominal1(0) ?>
-												</span>
-											</td>
-											<td>
-												<span class="text-left">Rp</span>
-												<span style="float:right;">
-													<?= nominal1(0) ?>
-												</span>
-											</td>
-										</tr>
-										<?php
-										$debet = 0;
-										$kredit = 0;
-										foreach ($all as $b) : ?>
-											<tr>
-												<td><?= date('d-m-Y H:i:s', strtotime($b['tanggal'])) ?></td>
-												<td><?= $b['account_name'] ?></td>
-												<td><?= $b['id_transaksi'] ?></td>
-												<td>
-													<span class="text-left">Rp</span>
-													<span style="float:right;">
-														<?= nominal1($b['debet']) ?>
-													</span>
-												</td>
-												<td>
-													<span class="text-left">Rp</span>
-													<span style="float:right;">
-														<?= nominal1($b['kredit']) ?>
-													</span>
-												</td>
+								<?php
+								foreach ($all['values'] as $rowData) : ?>
 
-												<!-- begin saldo -->
-												<?php
-												if ($b['normal_balance'] == 'd') {
-													$debet = $debet + ($b['debet'] - $b['kredit']);
-												} else {
-													$kredit = $kredit + ($b['kredit'] - $b['debet']);
-												}
-												?>
-												<td>
-													<span class="text-left">Rp</span>
-													<span style="float:right;">
-														<?= nominal1($debet) ?>
-													</span>
-												</td>
-												<td>
-													<span class="text-left">Rp</span>
-													<span style="float:right;">
-														<?= nominal1($kredit) ?>
-													</span>
-												</td>
+									<p class='p-3 text-bold mt-4' style='background-color:#dee2e6'><?= $rowData['account_no'] . '&nbsp;&nbsp;&nbsp;&nbsp;' . $rowData['account_name']  ?></p>
+									<table class="table table-bordered " style="width:100%">
+										<thead style="background-color: #0096c7;color:#fff">
+											<tr class="text-center">
+												<th style="width: 10%;" rowspan="2">Tanggal</th>
+												<th style="width: 20%;" rowspan="2">Keterangan</th>
+												<th style="width: 15%;" rowspan="2">Ref</th>
+												<th style="width: 10%;" rowspan="2">Debet</th>
+												<th style="width: 10%;" rowspan="2">Kredit</th>
+												<th colspan="2">Saldo</th>
 											</tr>
-										<?php endforeach ?>
-									</tbody>
-								</table>
+											<tr class="text-center">
+												<th style="width: 10%;">Debet</th>
+												<th style="width: 10%;">Kredit</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Saldo Awal</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td class='text-right'><?= nominal1($rowData['saldo_awal_debet']) ?></td>
+												<td class='text-right'><?= nominal1($rowData['saldo_awal_kredit']) ?></td>
+											</tr>
+											<?php
+											$detail = $rowData['gl'];
+											$debet = 0;
+											$kredit = 0;
+											foreach ($detail as $rowDetail) : ?>
+												<?php
+												if ($rowDetail['normal_balance'] == 'd') {
+													$debet = $debet + ($rowDetail['debet'] - $rowDetail['kredit']);
+												} else if ($rowDetail['normal_balance'] == 'k') {
+													$kredit = $kredit + ($rowDetail['kredit'] - $rowDetail['debet']);
+												}
+
+												?>
+												<tr>
+													<td><?= $rowDetail['tanggal'] ?></td>
+													<td><?= $rowDetail['keterangan'] ?></td>
+													<td><?= $rowDetail['id_transaksi'] ?></td>
+													<td class='text-right'><?= nominal1($rowDetail['debet']) ?></td>
+													<td class='text-right'><?= nominal1($rowDetail['kredit']) ?></td>
+													<td class='text-right'><?= nominal1($debet + $rowData['saldo_awal_debet']) ?></td>
+													<td class='text-right'><?= nominal1($rowData['saldo_awal_kredit'] + $kredit) ?></td>
+												</tr>
+											<?php endforeach ?>
+
+										</tbody>
+									</table>
+								<?php endforeach ?>
 
 							</div>
 						</div>
@@ -174,7 +153,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="<?= site_url('akuntansi/buku_besar') ?>" method="POST">
+				<form action="<?= site_url('akuntansi/buku_besar') ?>" method="GET">
 					<div class="form-group">
 						<label for="">Bulan:</label>
 						<input type="month" name="periode" id="" class="form-control" required>
@@ -184,7 +163,7 @@
 						<select name="account_name" class="form-control select2" style="width: 100%;" required>
 							<option value="">-pilih akun-</option>
 							<?php foreach ($list_akun as $ls) : ?>
-								<option value="<?= $ls['account_name'] ?>"> <?= $ls['account_no'] . ' ' . $ls['account_name'] ?> </option>
+								<option value="<?= $ls['account_no'] ?>"> <?= $ls['account_no'] . ' ' . $ls['account_name'] ?> </option>
 							<?php endforeach ?>
 						</select>
 					</div>

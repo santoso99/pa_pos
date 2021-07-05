@@ -121,6 +121,7 @@ $route['akuntansi/jurnal_umum']                = 'laporan/Jurnal';
 LAPORAN BUKU BESAR
 /--------------------------------------------------*/
 $route['akuntansi/buku_besar']                  = 'laporan/Buku';
+$route['akuntansi/bb_test']                     = 'laporan/Buku/test';
 
 /*--------------------------------------------------
 LAPORAN NERACA SALDO
