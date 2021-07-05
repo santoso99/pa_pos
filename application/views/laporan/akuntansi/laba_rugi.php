@@ -61,7 +61,8 @@
                         Filter Periode
                     </button>
                     <div class="box">
-                        <div class="box-header with-border">
+                        <div class="box-header with-border text-center">
+                            <h4>SG CElLULAR</h4>
                             <h4>Laporan Laba Rugi</h4>
                             <p>Periode <?= bulan($month) . ' ' . $year ?></p>
                         </div>
