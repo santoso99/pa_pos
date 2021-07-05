@@ -26,7 +26,9 @@
 						<?php foreach ($menu_item as $rowData) : ?>
 							<li>
 								<a href="<?= site_url($rowData['url']) ?>">
-									<i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i><?= $rowData['menu_name'] ?>
+									<i class="icon-Commit">
+									</i>
+									<?= $rowData['tcode'] . '-' . $rowData['menu_name'] ?>
 								</a>
 							</li>
 						<?php endforeach ?>
