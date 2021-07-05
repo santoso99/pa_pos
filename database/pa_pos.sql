@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 04, 2021 at 05:46 PM
+-- Generation Time: Jul 05, 2021 at 04:22 AM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -250,7 +250,11 @@ INSERT INTO `jurnal` (`id_jurnal`, `periode`, `tanggal`, `account_no`, `posisi`,
 (63, 202107, '2021-07-04 16:21:34', '1-10001', 'd', 25000000, 'TRX-SO-000000007'),
 (64, 202107, '2021-07-04 16:21:34', '4-10001', 'k', 25000000, 'TRX-SO-000000007'),
 (65, 202107, '2021-07-04 16:21:34', '6-10006', 'd', 23500000, 'TRX-SO-000000007'),
-(66, 202107, '2021-07-04 16:21:34', '1-10005', 'k', 23500000, 'TRX-SO-000000007');
+(66, 202107, '2021-07-04 16:21:34', '1-10005', 'k', 23500000, 'TRX-SO-000000007'),
+(67, 202107, '2021-07-05 03:14:56', '1-10001', 'd', 23000000, 'TRX-SO-000000008'),
+(68, 202107, '2021-07-05 03:14:56', '4-10001', 'k', 23000000, 'TRX-SO-000000008'),
+(69, 202107, '2021-07-05 03:14:56', '6-10006', 'd', 17000000, 'TRX-SO-000000008'),
+(70, 202107, '2021-07-05 03:14:56', '1-10005', 'k', 17000000, 'TRX-SO-000000008');
 
 -- --------------------------------------------------------
 
@@ -286,6 +290,38 @@ CREATE TABLE `lb_format` (
   `account_no` varchar(20) NOT NULL,
   `header` varchar(100) DEFAULT NULL,
   `sub_header` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_head`
+--
+
+CREATE TABLE `menu_head` (
+  `head_id` bigint(20) NOT NULL,
+  `head_name` varchar(100) NOT NULL,
+  `icon` longtext NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `nu` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_item`
+--
+
+CREATE TABLE `menu_item` (
+  `tcode` varchar(20) NOT NULL,
+  `nu` int(11) NOT NULL,
+  `menu_name` varchar(100) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `head_id` bigint(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -332,7 +368,7 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `id_transaksi`, `tanggal`, `id_warna`, `cogs`, `qty`, `ready`, `total`) VALUES
-(4, 'TRX-PO-000000001', '2021-07-04 03:21:28', 1, 17000000, 10, 8, 170000000),
+(4, 'TRX-PO-000000001', '2021-07-04 03:21:28', 1, 17000000, 10, 7, 170000000),
 (5, 'TRX-PO-000000002', '2021-07-04 08:55:10', 1, 17000000, 2, 1, 34000000),
 (6, 'TRX-PO-000000002', '2021-07-04 08:55:10', 2, 23500000, 10, 4, 235000000);
 
@@ -364,7 +400,8 @@ INSERT INTO `penjualan` (`id_penjualan`, `id_transaksi`, `id_warna`, `tanggal`, 
 (7, 'TRX-SO-000000004', 2, '2021-07-04 12:17:53', 6, 23500000, 25000000, 1),
 (8, 'TRX-SO-000000005', 2, '2021-07-04 12:19:57', 6, 23500000, 25000000, 1),
 (9, 'TRX-SO-000000006', 1, '2021-07-04 12:57:34', 4, 17000000, 23000000, 1),
-(10, 'TRX-SO-000000007', 2, '2021-07-04 16:21:26', 6, 23500000, 25000000, 1);
+(10, 'TRX-SO-000000007', 2, '2021-07-04 16:21:26', 6, 23500000, 25000000, 1),
+(11, 'TRX-SO-000000008', 1, '2021-07-05 03:14:46', 4, 17000000, 23000000, 1);
 
 -- --------------------------------------------------------
 
@@ -414,6 +451,29 @@ CREATE TABLE `retur_penjualan` (
 
 INSERT INTO `retur_penjualan` (`id_retur_penjualan`, `id_transaksi`, `tanggal`, `id_warna`, `id_penjualan`, `id_pembelian`, `cogs`, `harga_jual`, `qty`) VALUES
 (1, 'TRX-SR-000000001', '2021-07-04 13:17:17', 1, 9, 4, 17000000, 23000000, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) NOT NULL,
+  `role_name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', '2021-07-05 03:29:59', NULL),
+(2, 'Pemilik', '2021-07-05 03:29:59', NULL),
+(3, 'Kepala Toko', '2021-07-05 03:29:59', NULL),
+(4, 'Penjualan', '2021-07-05 03:29:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -475,7 +535,8 @@ INSERT INTO `stok` (`id_stok`, `periode`, `tanggal`, `id_transaksi`, `id_warna`,
 (16, 202107, '2021-07-04 12:23:01', 'TRX-PR-000000001', 2, 5, 23500000, 0, NULL),
 (17, 202107, '2021-07-04 12:57:34', 'TRX-SO-000000006', 1, 7, 17000000, 0, 4),
 (18, 202107, '2021-07-04 13:17:17', 'TRX-SR-000000001', 1, 8, 17000000, 1, NULL),
-(19, 202107, '2021-07-04 16:21:26', 'TRX-SO-000000007', 2, 4, 23500000, 0, 6);
+(19, 202107, '2021-07-04 16:21:26', 'TRX-SO-000000007', 2, 4, 23500000, 0, 6),
+(20, 202107, '2021-07-05 03:14:46', 'TRX-SO-000000008', 1, 7, 17000000, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -515,7 +576,25 @@ INSERT INTO `transaksi` (`id_transaksi`, `periode`, `id_vendor`, `id_pelanggan`,
 ('TRX-SO-000000005', 202107, NULL, 'MD-PL-00002', '2021-07-04 12:19:43', NULL, 1, 25000000, 'order', 'Penjualan Ke 5'),
 ('TRX-SO-000000006', 202107, NULL, 'MD-PL-00002', '2021-07-04 12:57:27', NULL, 1, 23000000, 'order', 'Penjualan 6'),
 ('TRX-SO-000000007', 202107, NULL, 'MD-PL-00001', '2021-07-04 16:21:11', NULL, 1, 25000000, 'order', 'Penjualan Ke 7'),
+('TRX-SO-000000008', 202107, NULL, 'MD-PL-00001', '2021-07-05 03:14:25', NULL, 1, 23000000, 'order', 'Penjualan 7'),
+('TRX-SO-000000009', 202107, NULL, NULL, '2021-07-05 03:16:22', NULL, 0, NULL, 'order', NULL),
 ('TRX-SR-000000001', 202107, NULL, NULL, '2021-07-04 13:17:17', 'TRX-SO-000000006', 1, 23000000, 'sales_return', 'Retur Penjualan 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `role` bigint(20) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '0: Blok 1: Aktif',
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -627,6 +706,19 @@ ALTER TABLE `lb_format`
   ADD KEY `account_no` (`account_no`);
 
 --
+-- Indexes for table `menu_head`
+--
+ALTER TABLE `menu_head`
+  ADD PRIMARY KEY (`head_id`);
+
+--
+-- Indexes for table `menu_item`
+--
+ALTER TABLE `menu_item`
+  ADD PRIMARY KEY (`tcode`),
+  ADD KEY `head_id` (`head_id`);
+
+--
 -- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
@@ -667,6 +759,12 @@ ALTER TABLE `retur_penjualan`
   ADD KEY `id_pembelian` (`id_pembelian`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `setting_jurnal`
 --
 ALTER TABLE `setting_jurnal`
@@ -687,6 +785,13 @@ ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id_transaksi`),
   ADD KEY `id_vendor` (`id_vendor`),
   ADD KEY `id_pelanggan` (`id_pelanggan`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `role` (`role`);
 
 --
 -- Indexes for table `vendor`
@@ -715,13 +820,19 @@ ALTER TABLE `detail_setting_jurnal`
 -- AUTO_INCREMENT for table `jurnal`
 --
 ALTER TABLE `jurnal`
-  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_jurnal` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `lb_format`
 --
 ALTER TABLE `lb_format`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `menu_head`
+--
+ALTER TABLE `menu_head`
+  MODIFY `head_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pembelian`
@@ -733,7 +844,7 @@ ALTER TABLE `pembelian`
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `retur_pembelian`
@@ -748,10 +859,22 @@ ALTER TABLE `retur_penjualan`
   MODIFY `id_retur_penjualan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
-  MODIFY `id_stok` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_stok` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `warna_barang`
@@ -804,6 +927,12 @@ ALTER TABLE `lb_format`
   ADD CONSTRAINT `lb_format_ibfk_1` FOREIGN KEY (`account_no`) REFERENCES `chart_of_account` (`account_no`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `menu_item`
+--
+ALTER TABLE `menu_item`
+  ADD CONSTRAINT `menu_item_ibfk_1` FOREIGN KEY (`head_id`) REFERENCES `menu_head` (`head_id`);
+
+--
 -- Constraints for table `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -846,6 +975,12 @@ ALTER TABLE `stok`
 ALTER TABLE `transaksi`
   ADD CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`id_vendor`) REFERENCES `vendor` (`id_vendor`),
   ADD CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id_pelanggan`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `warna_barang`
