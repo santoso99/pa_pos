@@ -56,6 +56,7 @@ class M_produk extends CI_Model
 			'os'					=> $this->input->post('os'),
 			'deskripsi_barang'		=> $this->input->post('deskripsi_barang'),
 			'harga_satuan'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('harga_satuan'))),
+			'harga_beli'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('harga_beli'))),
 			'foto_barang'			=> $data['file_name']
 		];
 		foreach ($nama_warna as $key => $val) {
@@ -75,13 +76,14 @@ class M_produk extends CI_Model
 		$produk = [
 			'nama_barang'			=> $this->input->post('nama_barang'),
 			'id_kategori'			=> $this->input->post('id_kategori'),
-			'id_brand'			=> $this->input->post('id_brand'),
-			'ram'				=> $this->input->post('ram'),
+			'id_brand'				=> $this->input->post('id_brand'),
+			'ram'					=> $this->input->post('ram'),
 			'memori'				=> $this->input->post('memori'),
-			'layar'				=> $this->input->post('layar'),
+			'layar'					=> $this->input->post('layar'),
 			'os'					=> $this->input->post('os'),
 			'deskripsi_barang'		=> $this->input->post('deskripsi_barang'),
 			'harga_satuan'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('harga_satuan'))),
+			'harga_beli'			=> intval(preg_replace("/[^0-9]/", "", $this->input->post('harga_beli'))),
 			'foto_barang'			=> $data['file_name']
 		];
 		foreach ($nama_warna as $key => $val) {

@@ -136,10 +136,17 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label for="harga_satuan" class="col-sm-2 control-label">Harga Satuan</label>
+										<label for="harga_satuan" class="col-sm-2 control-label">Harga Satuan Jual</label>
 
 										<div class="col-sm-10">
-											<input type="text" class="form-control" name="harga_satuan" id="harga_satuan" data-type="currency" placeholder="Harga Satuan">
+											<input type="text" class="form-control" name="harga_satuan" id="harga_satuan" data-type="currency" placeholder="Harga Satuan Jual">
+										</div>
+
+									</div>
+									<div class="form-group row">
+										<label for="harga_beli" class="col-sm-2 control-label">Harga Satuan Beli</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="harga_beli" id="harga_beli" data-type="currency" placeholder="Harga Satuan Beli">
 										</div>
 									</div>
 									<div class="form-group row">
