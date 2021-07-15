@@ -133,7 +133,7 @@
 				<form action="<?= site_url('kas/masuk/store') ?>" method="POST">
 					<div class="form-group">
 						<label for="">Tanggal</label>
-						<input type="date" name="tanggal" class="form-control" max="<?= date('Y-m-d') ?>">
+						<input type="date" name="tanggal" class="form-control" min="<?= date('Y-m') . '-01' ?>" max="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>">
 					</div>
 					<div class="form-group">
 						<label for="">Kategori Transaksi</label>
@@ -180,7 +180,7 @@
 						<input type="hidden" name="id_transaksi" value="<?= $row['id_transaksi'] ?>">
 						<div class="form-group">
 							<label for="">Tanggal</label>
-							<input type="date" name="tanggal" class="form-control" max="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d', strtotime($row['tanggal'])) ?>">
+							<input type="date" name="tanggal" class="form-control" min="<?= date('Y-m') . '-01' ?>" max="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d', strtotime($row['tanggal'])) ?>">
 						</div>
 						<div class="form-group">
 							<label for="">Jumlah</label>
