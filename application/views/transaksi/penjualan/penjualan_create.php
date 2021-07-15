@@ -53,11 +53,15 @@
 									<input type="text" name="harga_jual" id="harga_jual" class="form-control" required readonly>
 								</div>
 								<div class="form-group">
+									<label for="stok">Stok</label>
+									<input type="text" name="stok" id="stok" class="form-control" required readonly>
+								</div>
+								<div class="form-group">
 									<label for="qty">Qty</label>
 									<input type="number" name="qty" id="qty" class="form-control" min="1" required>
 								</div>
 								<div class="form-group pull-right">
-									<button type="submit" class="btn btn-rounded btn-info btn-sm">Tambahkan</button>
+									<button type="submit" id="btn-item-sales" class="btn btn-rounded btn-info btn-sm">Tambahkan</button>
 								</div>
 							</form>
 						</div>

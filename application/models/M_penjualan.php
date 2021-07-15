@@ -74,11 +74,18 @@ class M_penjualan extends CI_Model
 	public function find_produk()
 	{
 		$id = $this->input->post('id_warna');
-		$this->db->select('a.id_barang,a.nama_barang,a.memori,a.harga_satuan,b.id_warna,b.nama_warna')
+		$produk = $this->db->select('a.id_barang,a.nama_barang,a.memori,a.harga_satuan,a.harga_beli,b.id_warna,b.nama_warna')
 			->from('barang as a')
 			->join('warna_barang as b', 'a.id_barang=b.id_barang')
-			->where('id_warna', $id);
-		return $this->db->get()->row_array();
+			->where('id_warna', $id)
+			->get()->row_array();
+
+		$stok = $this->ready_stock($id);
+
+		return [
+			'produk'		=> $produk,
+			'stock'			=> $stok
+		];
 	}
 	private function purchasing($id_warna)
 	{
@@ -98,11 +105,18 @@ class M_penjualan extends CI_Model
 	}
 	private function ready_stock($id_warna)
 	{
-		$purchasing = $this->purchasing($id_warna);
-		$sales	  = $this->sales($id_warna);
+		// $purchasing 	= $this->purchasing($id_warna);
+		// $sales	  		= $this->sales($id_warna);
+
+		$stok = $this->db->select('sum(ready) as ready_stock')
+			->from('pembelian')
+			->where('id_warna', $id_warna)
+			->group_by('id_warna')
+			->get()
+			->row_array();
 
 		$data = [
-			'ready_stock'		=> $purchasing['purchasing'] - $sales['sales']
+			'ready_stock'		=> $stok['ready_stock']
 		];
 		return $data;
 	}

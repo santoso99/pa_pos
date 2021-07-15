@@ -113,10 +113,18 @@
 				data: {
 					id_warna: id_warna,
 				},
-				success: function(data) {
+				success: function(res) {
+					var data = res.produk;
+					var stok = res.stock;
 
 					harga_jual = new Intl.NumberFormat('ja-JP').format(data.harga_satuan);
+					harga_beli = new Intl.NumberFormat('ja-JP').format(data.harga_beli);
 					$('#harga_jual').val('Rp ' + harga_jual);
+					$('#stok').val(stok.ready_stock);
+					if (stok.ready_stock <= 0) {
+						$('#btn-item-sales').attr('disabled', 'disabled');
+					}
+
 				}
 			});
 		});
