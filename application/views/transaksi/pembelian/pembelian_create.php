@@ -108,6 +108,7 @@
 												<th>Produk</th>
 												<th>Harga Satuan</th>
 												<th>Kuantitas</th>
+												<th>Subtotal</th>
 												<th class="no-content"></th>
 											</tr>
 										</thead>
@@ -118,7 +119,7 @@
 												</td>
 
 												<td>
-													<select name="id_warna[]" class="form-control select2" style="width: 100%;" required>
+													<select name="id_warna[]" class="form-control id_warna form-calc select2" style="width: 100%;" required>
 														<option value="">-pilih produk-</option>
 														<?php foreach ($produk as $p) : ?>
 															<option value="<?= $p['id_warna'] ?>">
@@ -128,10 +129,13 @@
 													</select>
 												</td>
 												<td>
-													<input type="text" name="cogs[]" class="form-control" data-type="currency">
+													<input type="text" name="cogs[]" class="form-control cogs form-calc" data-type="currency">
 												</td>
 												<td>
-													<input type="text" name="qty[]" class="form-control">
+													<input type="text" name="qty[]" class="form-control qty form-calc" value="1">
+												</td>
+												<td>
+													<input type="text" name="jumlah[]" id="jumlah-" class="form-control form-line jumlah" readonly required>
 												</td>
 												<td class="text-center">
 
@@ -175,7 +179,7 @@
 			</td>
 
 			<td>
-				<select name="id_warna[]" class="form-control select21" style="width: 100%;" required>
+				<select name="id_warna[]" class="form-control select21 id_warna form-calc" style="width: 100%;" required>
 					<option value="">-pilih produk-</option>
 					<?php foreach ($produk as $p) : ?>
 						<option value="<?= $p['id_warna'] ?>">
@@ -185,10 +189,14 @@
 				</select>
 			</td>
 			<td>
-				<input type="text" name="cogs[]" class="form-control" data-type="currency">
+				<input type="text" name="cogs[]" class="form-control cogs form-calc " data-type="currency">
 			</td>
 			<td>
-				<input type="text" name="qty[]" class="form-control">
+				<input type="text" name="qty[]" class="form-control qty form-calc" value="1">
+			</td>
+
+			<td>
+				<input type="text" name="jumlah[]" id="jumlah-" class="form-control form-line jumlah" readonly required>
 			</td>
 			<td class="text-center">
 				<a href="#" class="text-danger  btn-icon delete-record" data-id="0">
@@ -203,3 +211,4 @@
 	</table>
 </div>
 <?php $this->load->view('_partials/footer'); ?>
+<?php $this->load->view('transaksi/pembelian/script'); ?>

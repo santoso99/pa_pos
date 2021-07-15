@@ -60,6 +60,14 @@ class M_pembelian extends CI_Model
 			->join('warna_barang as b', 'a.id_barang=b.id_barang');
 		return $this->db->get()->result_array();
 	}
+	public function find_produk($id)
+	{
+		$this->db->select('a.id_barang,a.nama_barang,a.memori,b.id_warna,b.nama_warna,a.harga_beli')
+			->from('barang as a')
+			->join('warna_barang as b', 'a.id_barang=b.id_barang')
+			->where('b.id_warna', $id);
+		return $this->db->get()->row_array();
+	}
 	public function validate_kas()
 	{
 		$this->db->select('SUM(IF( posisi = "d", nominal, 0)) AS debet,SUM(IF( posisi = "k", nominal, 0)) AS kredit')

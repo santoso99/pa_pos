@@ -71,6 +71,7 @@ $route['master/pelanggan/update']               = 'master/Pelanggan/update';
 TRANSAKSI PEMBELIAN
 /--------------------------------------------------*/
 $route['transaksi/pembelian']                       = 'transaksi/Pembelian';
+$route['transaksi/pembelian/find_produk']           = 'transaksi/Pembelian/find_produk';
 $route['transaksi/pembelian/create']                = 'transaksi/Pembelian/create';
 $route['transaksi/pembelian/store']                 = 'transaksi/Pembelian/store';
 $route['transaksi/pembelian/detail/(:any)']         = 'transaksi/Pembelian/show/$1';

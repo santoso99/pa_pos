@@ -39,6 +39,12 @@ class Pembelian extends CI_Controller
 		];
 		$this->load->view('transaksi/pembelian/pembelian_create', $data);
 	}
+	public function find_produk()
+	{
+		$id = $this->input->post('id_warna');
+		$req = $this->model->find_produk($id);
+		echo json_encode($req);
+	}
 	public function store()
 	{
 		$request = $this->model->store();
