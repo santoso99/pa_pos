@@ -149,14 +149,31 @@ class M_fifo extends CI_Model
 		return $this->db->get()->result_array();
 	}
 
-	// public function try()
-	// {
-	// 	// $this->db->select('a.id_transaksi,a.id_warna,a.qty  as sisa,a.cogs as hpp,a.tipe as level,a.id_pembelian ')
-	// 	$this->db->select('*')
-	// 		->from('stok as a')
-	// 		->where('a.id_warna', '1');
-	// 	return $this->db->get()->result_array();
-	// }
+	public function try($y, $m, $id)
+	{
+
+		$produk = $this->db->query("SELECT a.id_barang,b.id_warna ,CONCAT(a.nama_barang,' ', b.nama_warna,' ',a.memori) as nama_produk
+		FROM barang as a
+		JOIN warna_barang as b 
+		ON a.id_barang=b.id_barang")->result_array();
+
+		$data = $this->db->query("SELECT id_transaksi, DATE_FORMAT(tanggal,'%d/%m/%Y') as tanggal, id_warna, cogs, qty, 'purchase' as tipe, id_pembelian, '1' as stock_type
+		FROM pembelian  WHERE id_warna = $id AND month(tanggal) = $m AND year(tanggal) = $y
+		UNION 
+		SELECT id_transaksi, DATE_FORMAT(tanggal,'%d/%m/%Y') as tanggal, id_warna, cogs, qty, 'sales' as tipe, id_pembelian, '0' as stock_type
+		FROM penjualan WHERE id_warna = $id AND month(tanggal) = $m AND year(tanggal) = $y
+		UNION
+		SELECT id_transaksi, DATE_FORMAT(tanggal,'%d/%m/%Y') as tanggal, id_warna, cogs, qty, 'purchase_return' as tipe, id_pembelian, '0' as stock_type
+		FROM retur_pembelian WHERE id_warna = $id AND month(tanggal) = $m AND year(tanggal) = $y
+		UNION
+		SELECT id_transaksi, DATE_FORMAT(tanggal,'%d/%m/%Y') as tanggal, id_warna, cogs, qty, 'sales_return' as tipe, id_pembelian, '1' as stock_type
+		FROM retur_penjualan WHERE id_warna =$id AND month(tanggal) = $m AND year(tanggal) = $y  ")->result();
+
+
+
+
+		return $data;
+	}
 }
 
 /* End of file M_fifo.php */

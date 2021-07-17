@@ -70,130 +70,218 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="table-responsive">
-								<table class="table table-hover" style="width:100%">
+								<table class="table table-sm  ">
 									<thead>
 										<tr>
-											<th rowspan="2">No Transaksi</th>
-											<th rowspan="2">Tanggal</th>
-
-											<th colspan="3" class="text-center">Pembelian</th>
-											<th colspan="3" class="text-center">Harga Pokok Penjualan</th>
-											<th colspan="3" class="text-center">Persediaan</th>
+											<th rowspan="2" style="text-align:center" style="vertical-align: middle;">Tanggal</th>
+											<th colspan="3" style="text-align:center">Masuk</th>
+											<th colspan="3" style="text-align:center">Keluar</th>
+											<th colspan="3" style="text-align:center">Saldo</th>
 										</tr>
 										<tr>
-											<th>Unit</th>
-											<th>Harga</th>
-											<th>Total</th>
-											<!-- cogs -->
-											<th>Unit</th>
-											<th>Harga</th>
-											<th>Total</th>
-											<!-- inventory -->
-											<th>Unit</th>
-											<th>Harga</th>
-											<th>Total</th>
+											<th style="text-align:center">Unit</th>
+											<th style="text-align:center">Harga/unit</th>
+											<th style="text-align:center">Jumlah</th>
+											<th style="text-align:center">Unit</th>
+											<th style="text-align:center">Harga/unit</th>
+											<th style="text-align:center">Jumlah</th>
+											<th style="text-align:center">Unit</th>
+											<th style="text-align:center">Harga/unit</th>
+											<th style="text-align:center">Jumlah</th>
 										</tr>
 									</thead>
 									<tbody>
-										<?php if ($all) : ?>
-											<?php
+										<?php
+										$total_jumlah_input_barang = 0;
+										$total_harga_input_barang = 0;
+										$total_jumlah_pemakaian = 0;
+										$total_harga_pemakaian = 0;
+										$unit = 0;
+										$jumlah = 0;
+										$jumlah_penj = 0;
+										$unit_penj = 0;
+										$saldo = 0;
+										$saldo_harga = 0;
+										$saldo1 = 0;
 
-											$purchase = 0;
-											$sales = 0;
-											foreach ($all['data'] as $f) : ?>
-												<tr>
-													<td><?= $f['id_transaksi'] ?></td>
-													<td><?= date('d/m/Y', strtotime($f['tanggal'])) ?></td>
+										$saldo_k = array(0);
+										$saldo_h = array(0);
+										$saldo_t = array(0);
+										$cek = 0;
+										$no = 1;
+										foreach ($stok_data as $data) {
+											$nama_transaksi = $data->stock_type;
+											if ($nama_transaksi == "1") {
+												$cek++;
+												array_push($saldo_k, $data->qty);
+												array_push($saldo_h, $data->cogs);
+												array_push($saldo_t, $data->qty * $data->cogs);
+												$z = 0;
+												$saldo1 = 0;
+												$saldo = 0;
+												for ($i = 0; $i <= $cek; $i++) {
 
-													<?php if ($f['tipe'] == 'purchasing') : ?>
+													if ($saldo_k[$i] != 0) {
+										?>
+														<tr>
+															<td align="center"><?php if ($z == 0) echo $data->tanggal;  ?></td>
+															<td align="center"><?php if ($z == 0) echo $data->qty; ?></td>
+															<td align="right"> <?php if ($z == 0) echo "Rp " . number_format($data->cogs, 0, ',', '.'); ?></td>
+															<td align="right"> <?php if ($z == 0) echo "Rp " . number_format($data->qty * $data->cogs, 0, ',', '.'); ?></td>
+															<td align="center"></td>
+															<td align="center"></td>
+															<td align="center"></td>
+															<td align="center"><?php echo $saldo_k[$i]; ?></td>
+															<td align="right"><?php echo "Rp " . number_format($saldo_h[$i], 0, ',', '.'); ?></td>
+															<td align="right"><?php echo "Rp " . number_format($saldo_t[$i], 0, ',', '.'); ?></td>
+														</tr>
 
-														<td><?= $f['qty'] ?></td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['cogs']) ?>
-															</span>
-														</td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['total']) ?>
-															</span>
-														</td>
-														<!-- /.purchasing -->
-														<td></td>
-														<td></td>
-														<td></td>
-														<!-- /.sales order -->
-														<?php foreach ($stock as $st) : ?>
-															<?php if ($st['id_transaksi'] == $f['id_transaksi'] && $f['id_warna'] == $st['id_warna']) : ?>
-																<td><?= $st['sisa'] ?></td>
-																<td>
-																	<span class="text-left">Rp</span>
-																	<span style="float:right;">
-																		<?= nominal1($st['hpp']) ?>
-																	</span>
-																</td>
-																<td>
-																	<span class="text-left">Rp</span>
-																	<span style="float:right;">
-																		<?= nominal1($st['hpp'] * $st['sisa']) ?>
-																	</span>
-																</td>
-															<?php endif ?>
-														<?php endforeach ?>
-														<!-- /.inventory -->
-													<?php endif ?>
-													<!-- /.purhcasing area -->
-													<?php if ($f['tipe'] == 'order') : ?>
+														<?php
+														$saldo1 = $saldo1 + $saldo_k[$i];
+														$saldo = $saldo + $saldo_t[$i];
+														$z++;
+													}
+												}
+												$unit = $unit + $data->qty;
+												$jumlah = $jumlah + ($data->qty * $data->cogs);
 
-														<td></td>
-														<td></td>
-														<td></td>
-														<!-- /.purchasing -->
-														<td><?= $f['qty'] ?></td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['cogs']) ?>
-															</span>
-														</td>
-														<td>
-															<span class="text-left">Rp</span>
-															<span style="float:right;">
-																<?= nominal1($f['total']) ?>
-															</span>
-														</td>
-														<!-- /.sales order -->
-														<?php foreach ($stock as $st) : ?>
-															<?php if ($st['id_transaksi'] == $f['id_transaksi'] && $f['id_warna'] == $st['id_warna'] && $f['id_pembelian'] == $st['id_pembelian']) : ?>
-																<td><?= $st['sisa'] ?></td>
-																<td>
-																	<span class="text-left">Rp</span>
-																	<span style="float:right;">
-																		<?= nominal1($st['hpp']) ?>
-																	</span>
-																</td>
-																<td>
-																	<span class="text-left">Rp</span>
-																	<span style="float:right;">
-																		<?= nominal1($st['hpp'] * $st['sisa']) ?>
-																	</span>
-																</td>
-															<?php endif ?>
-														<?php endforeach ?>
-														<!-- /.inventory -->
-													<?php endif ?>
+												$total_jumlah_input_barang = $total_jumlah_input_barang + $data->qty;
+												$total_harga_input_barang = $total_harga_input_barang + ($data->qty * $data->cogs);
+											} else {
+												$status = false;
+												$z = 0;
+												$idx = 0;
+												$my_saldo_k = $data->qty;
+												$jumlah_terpakai = 0;
+												$harga_terpakai = 0;
+												$saldo = 0;
+												$saldo1 = 0;
 
-												</tr>
-											<?php endforeach ?>
-										<?php endif ?>
-										<?php if (!$all) : ?>
-											<tr>
-												<td class="text-center" colspan="5">Oops... Data tidak ditemukan !</td>
-											</tr>
-										<?php endif ?>
+												while ($status == false) {
+													if ($saldo_k[$idx] > 0) {
+														if ($my_saldo_k > $saldo_k[$idx]) {
+															$jumlah_terpakai = $saldo_k[$idx];
+															$my_saldo_k = $my_saldo_k - $jumlah_terpakai;
+															$saldo_k[$idx] = 0;
+															$harga_terpakai = $saldo_h[$idx];
+														} else if ($my_saldo_k == $saldo_k[$idx]) {
+															$saldo_k[$idx] = $saldo_k[$idx] - $my_saldo_k;
+															$jumlah_terpakai = $my_saldo_k;
+															$my_saldo_k = 0;
+															$harga_terpakai = $saldo_h[$idx];
+														} else {
+															$saldo_k[$idx] = $saldo_k[$idx] - $my_saldo_k;
+															$jumlah_terpakai = $my_saldo_k;
+															$my_saldo_k = 0;
+															$harga_terpakai = $saldo_h[$idx];
+														}
+														if ($my_saldo_k == 0) {
+															$status = true;
+														}
+														$saldo_t[$idx] = $saldo_k[$idx] * $saldo_h[$idx];
+														$total_harga_terpakai = $jumlah_terpakai * $harga_terpakai;
+														$total_jumlah_pemakaian = $total_jumlah_pemakaian + $jumlah_terpakai;
+														$total_harga_pemakaian = $total_harga_pemakaian + $total_harga_terpakai;
+														$saldo = $saldo + $saldo_t[$idx];
+														$saldo1 = $saldo1 + $saldo_k[$idx];
+
+														if ($nama_transaksi == "0") {
+															$unit_penj = $unit_penj + $jumlah_terpakai;
+															$jumlah_penj = $jumlah_penj + $total_harga_terpakai;
+														?>
+															<tr>
+																<td align="center"><?php if ($z == 0) echo $data->tanggal;  ?></td>
+																<td align="center"></td>
+																<td align="right"></td>
+																<td align="right"></td>
+																<td align="center"><?php echo number_format($jumlah_terpakai); ?></td>
+																<td align="center"><?php echo "Rp " . number_format($harga_terpakai, 0, ',', '.'); ?></td>
+																<td align="center"><?php echo "Rp " . number_format($total_harga_terpakai, 0, ',', '.'); ?></td>
+																<td align="center"><?php if ($saldo_k[$idx] != 0) echo $saldo_k[$idx]; ?></td>
+																<td align="right"><?php if ($saldo_k[$idx] != 0) echo "Rp " . number_format($saldo_h[$idx], 0, ',', '.'); ?></td>
+																<td align="right"><?php if ($saldo_k[$idx] != 0) echo "Rp " . number_format($saldo_t[$idx], 0, ',', '.'); ?></td>
+															</tr>
+														<?php
+
+														}
+
+														$z++;
+													}
+													$idx++;
+												}
+												for ($i = $idx; $i <= $cek; $i++) {
+													if ($saldo_k[$i] != 0) {
+														?>
+														<tr>
+															<td align="center"></td>
+															<td align="center"></td>
+															<td align="right"></td>
+															<td align="right"></td>
+															<td align="center"></td>
+															<td align="center"></td>
+															<td align="center"></td>
+															<td align="center"><?php if ($saldo_k[$i] != 0) echo $saldo_k[$i]; ?></td>
+															<td align="right"> <?php if ($saldo_k[$i] != 0) echo "Rp " . number_format($saldo_h[$i], 0, ',', '.'); ?></td>
+															<td align="right"><?php if ($saldo_k[$i] != 0) echo "Rp " . number_format($saldo_t[$i], 0, ',', '.'); ?></td>
+														</tr>
+										<?php
+
+													}
+													$saldo = $saldo + $saldo_t[$idx];
+													$saldo1 = $saldo1 + $saldo_k[$idx];
+												}
+											}
+
+											$no++;
+										}
+										?>
 									</tbody>
+									<tr>
+										<td align="center">Saldo Masuk</td>
+										<td align="center"><?php echo $unit; ?></td>
+										<td></td>
+										<td align="right">Rp <?php echo number_format($jumlah, 0, ',', '.'); ?></td>
+
+										<td align="center"></td>
+										<td></td>
+										<td align="right"></td>
+
+										<td align="center"></td>
+										<td></td>
+										<td align="right"></td>
+									</tr>
+
+									<tr>
+										<td align="center">Saldo Keluar</td>
+										<td align="center"></td>
+										<td></td>
+										<td></td>
+
+										<td align="center"><?php echo $unit_penj; ?></td>
+										<td></td>
+										<td align="right">Rp <?php echo number_format($jumlah_penj, 0, ',', '.'); ?></td>
+
+										<td></td>
+										<td></td>
+										<td align="right"></td>
+									</tr>
+									<tr>
+										<td align="center">Saldo Total</td>
+										<td align="center"></td>
+										<td></td>
+										<td align="right"></td>
+
+										<td align="center"></td>
+										<td></td>
+										<td align="right"></td>
+
+										<td align="center"><?php echo $saldo1; ?></td>
+										<td></td>
+										<td align="right">Rp <?php echo number_format($saldo, 0, ',', '.'); ?></td>
+									</tr>
+									<?php
+									?>
+
 								</table>
 
 							</div>

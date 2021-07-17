@@ -25,10 +25,12 @@ class Fifo extends CI_Controller
 			$m = date('m', strtotime($periode));
 			$y = date('Y', strtotime($periode));
 			$id = $this->input->get('id');
+			$periode = $y . '' . $m;
 		}
 		$data = [
 			'title'			=> 'Kartu Stok',
 			'all'			=> $this->model->all($y, $m, $id),
+			'stok_data'		=> $this->model->try($y, $m, $id),
 			'stock'			=> $this->model->stock(),
 			'produk'		=> $this->model->produk(),
 			'month'			=> $m,
@@ -37,20 +39,15 @@ class Fifo extends CI_Controller
 
 		$this->load->view('laporan/persediaan/fifo', $data);
 	}
-	// public function try()
-	// {
-	// 	$periode = $this->input->post('periode');
-	// 	if ($periode === null) {
-	// 		$m = date('m');
-	// 		$y = date('Y');
-	// 	} else {
-	// 		$m = date('m', strtotime($periode));
-	// 		$y = date('Y', strtotime($periode));
-	// 	}
-	// 	$req = $this->model->all($y, $m);
+	public function try()
+	{
+		$periode = '202107';
+		$id = '1';
 
-	// 	echo json_encode($req);
-	// }
+		$req = $this->model->try($periode, $id);
+
+		echo json_encode($req);
+	}
 }
 
 /* End of file Fifo.php */
