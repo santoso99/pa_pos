@@ -157,6 +157,12 @@ LAPORAN FIFO
 /--------------------------------------------------*/
 $route['akuntansi/lb']                        = 'laporan/Laba_rugi';
 
+/*--------------------------------------------------
+LAPORAN RETUR PEMBELIAN
+/--------------------------------------------------*/
+$route['inventory/retur_pembelian']          = 'laporan/Retur';
+
+
 
 /*--------------------------------------------------
 SETTING USER
