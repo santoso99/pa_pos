@@ -162,6 +162,11 @@ LAPORAN RETUR PEMBELIAN
 /--------------------------------------------------*/
 $route['inventory/retur_pembelian']          = 'laporan/Retur';
 
+/*--------------------------------------------------
+LAPORAN RETUR PENJUALAN
+/--------------------------------------------------*/
+$route['inventory/retur_penjualan']          = 'laporan/Retur/sales_return_report';
+
 
 
 /*--------------------------------------------------

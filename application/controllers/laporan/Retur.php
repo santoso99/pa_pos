@@ -29,6 +29,26 @@ class Retur extends CI_Controller
         ];
         $this->load->view('laporan/retur/purchase_return_report', $data);
     }
+
+    // sales return report
+    public function sales_return_report()
+    {
+        $periode = $this->input->post('periode');
+        if ($periode === null) {
+            $m = date('m');
+            $y = date('Y');
+        } else {
+            $m = date('m', strtotime($periode));
+            $y = date('Y', strtotime($periode));
+        }
+        $data = [
+            'title'             => "Laporan Retur Penjualan",
+            'all'               => $this->model->sales_return_report($y, $m),
+            'month'             => $m,
+            'year'              => $y
+        ];
+        $this->load->view('laporan/retur/sales_return_report', $data);
+    }
 }
 
 /* End of file Retur.php */
